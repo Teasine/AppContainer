@@ -28,5 +28,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.addMarker(new MarkerOptions().position(sydney)
                 .title("Marker in Sydney"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        // Add a marker in Sydney, Australia,
+        // and move the map's camera to the same location.
+        LatLng antartida = new LatLng(-79.054148, 26.783465);
+        googleMap.addMarker(new MarkerOptions().position(antartida)
+                .title("Marker in Antartida"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(antartida));
+
+        // Add a marker in Sydney, Australia,
+        // and move the map's camera to the same location.
+        LatLng argentina = new LatLng(-38.726140, -62.270526);
+        googleMap.addMarker(new MarkerOptions().position(argentina)
+                .title("Marker in Argentina"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(argentina));
     }
 }
