@@ -9,6 +9,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.leinardi.android.speeddial.SpeedDialActionItem;
+import com.leinardi.android.speeddial.SpeedDialView;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     @Override
@@ -18,6 +20,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Fab
+        SpeedDialView speedDialView = findViewById(R.id.speedDial);
+        speedDialView.addActionItem(
+                new SpeedDialActionItem.Builder(R.id.fab, R.drawable.baseline_add_24)
+                        .create()
+        );
+
+   /*     speedDialView.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
+            @Override
+            public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
+                switch (speedDialActionItem.getId()) {
+                    case R.id.fab:
+                        //showToast("Link action clicked!");
+                        return false; // true to keep the Speed Dial open
+                    default:
+                        return false;
+                }
+            }
+        }); */
     }
 
     @Override

@@ -29,4 +29,7 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-location:11.8.0'
+
+    implementation "com.leinardi.android:speed-dial:1.0-alpha06"
+
 }
