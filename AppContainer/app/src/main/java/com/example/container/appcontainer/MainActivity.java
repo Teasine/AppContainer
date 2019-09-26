@@ -24,22 +24,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Fab
         SpeedDialView speedDialView = findViewById(R.id.speedDial);
         speedDialView.addActionItem(
-                new SpeedDialActionItem.Builder(R.id.fab, R.drawable.baseline_add_24)
+                new SpeedDialActionItem.Builder((R.id.fab), R.drawable.baseline_add_24)
                         .create()
         );
 
-   /*     speedDialView.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
+        speedDialView.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
             @Override
             public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
                 switch (speedDialActionItem.getId()) {
                     case R.id.fab:
                         //showToast("Link action clicked!");
-                        return false; // true to keep the Speed Dial open
+                        return true; // true to keep the Speed Dial open
                     default:
                         return false;
                 }
             }
-        }); */
+        });
     }
 
     @Override
