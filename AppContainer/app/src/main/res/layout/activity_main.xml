@@ -14,41 +14,4 @@
     tools:context=".MapsActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-    <menu app:layout_constraintEnd_toEndOf="parent">
-
-        <item
-            android:id="@+id/action_call"
-            android:icon="@drawable/ic_call_black_24px"
-            android:title="@string/menu_item_call" />
-
-        <item
-            android:id="@+id/action_text"
-            android:icon="@drawable/ic_chat_bubble_outline_black_24px"
-            android:title="@string/menu_item_text" />
-
-        <item
-            android:id="@+id/action_email"
-            android:icon="@drawable/ic_mail_outline_black_24px"
-            android:title="@string/menu_item_email" />
-    </menu>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        tools:layout_editor_absoluteX="-83dp"
-        tools:layout_editor_absoluteY="214dp">
-
-        <io.github.yavski.fabspeeddial.FabSpeedDial
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:fabGravity="bottom_end"
-            app:fabMenu="@menu/menu_main"
-            app:miniFabBackgroundTint="@android:color/white"
-            app:miniFabDrawableTint="?attr/colorPrimaryDark"
-            app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
-
-    </FrameLayout>
-
 </android.support.constraint.ConstraintLayout>
