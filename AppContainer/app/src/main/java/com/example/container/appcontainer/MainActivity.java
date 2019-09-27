@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .create()
         );
 
+
         speedDialView.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
             @Override
             public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
