@@ -1,12 +1,13 @@
 package com.example.container.appcontainer;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
@@ -47,22 +48,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
         LatLng sydney = new LatLng(-33.852, 151.211);
+
+        // create marker
+        MarkerOptions marker = new MarkerOptions().position(sydney);
+
         googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney"));
+                .title("Marker in Sydney").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
         LatLng antartida = new LatLng(-79.054148, 26.783465);
         googleMap.addMarker(new MarkerOptions().position(antartida)
-                .title("Marker in Antartida"));
+                .title("Marker in Antartida").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(antartida));
 
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
         LatLng argentina = new LatLng(-38.726140, -62.270526);
         googleMap.addMarker(new MarkerOptions().position(argentina)
-                .title("Marker in Argentina"));
+                .title("Marker in Argentina").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(argentina));
+
+
     }
 }
