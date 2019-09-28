@@ -1,6 +1,8 @@
 package com.example.container.appcontainer;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,7 +15,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
+import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+    SpeedDialView speedDialView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,23 +28,58 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Fab
-        SpeedDialView speedDialView = findViewById(R.id.speedDial);
+        // ---------- FAB SPEED DIAL ------------------------------------------------------------------------------------
+
+        // acceder speed dial
+        speedDialView = findViewById(R.id.speedDial);
+
+        // cambiar icono del fab principal
+        speedDialView.setMainFabClosedDrawable(MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
+                .setIcon(MaterialDrawableBuilder.IconValue.DOTS_HORIZONTAL) // provide an icon
+                .setColor(Color.WHITE) // set the icon color
+                .setToActionbarSize() // set the icon size
+                .build());
+
+        // rotacion de abrir/cerrar fab a 90º para que gire de hor a vert
+        speedDialView.setMainFabAnimationRotateAngle(90);
+
+        // action item filtro, añade icono de filter
         speedDialView.addActionItem(
-                new SpeedDialActionItem.Builder((R.id.fab), R.drawable.baseline_add_24)
+                new SpeedDialActionItem.Builder((R.id.fabFilter), MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
+                        .setIcon(MaterialDrawableBuilder.IconValue.FILTER_VARIANT) // provide an icon
+                        .setColor(Color.WHITE) // set the icon color
+                        .setToActionbarSize() // set the icon size
+                        .build())
+                        .create()
+        );
+        // action item settings, añade icono de settings
+        speedDialView.addActionItem(
+                new SpeedDialActionItem.Builder(R.id.settings, MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
+                        .setIcon(MaterialDrawableBuilder.IconValue.SETTINGS_OUTLINE) // provide an icon
+                        .setColor(Color.WHITE) // set the icon color
+                        .setToActionbarSize() // set the icon size
+                        .build())
                         .create()
         );
 
-
+        // callback listener de pulsar settings o filtro
         speedDialView.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
             @Override
             public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
                 switch (speedDialActionItem.getId()) {
-                    case R.id.fab:
-                        //showToast("Link action clicked!");
-                        return true; // true to keep the Speed Dial open
+                    case R.id.settings:
+                        // settings action
+
+                        // cerrar con animacion cuando pulsas
+                        speedDialView.close();
+                    case R.id.fabFilter:
+                        // filter action
+
+                        // cerrar el fab con animacion cuando pulsas
+                        speedDialView.close();
+                        return false; // cierra el fab sin animacion
                     default:
-                        return false;
+                        return true; // true to keep the Speed Dial open
                 }
             }
         });
