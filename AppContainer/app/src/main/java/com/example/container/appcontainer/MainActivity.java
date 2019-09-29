@@ -109,9 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.filter:
                         // filter action
                         boolean open = showFilterMenu(findViewById(R.id.filter));
-                        // cerrar el fab con animacion cuando pulsas
-                        speedDialView.close();
-                        return false; // cierra el fab sin animacion
+                        return true; // cierra el fab sin animacion
                     case R.id.info:
                         // filter action
 
@@ -168,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public boolean showFilterMenu(View anchor) {
-        PopupMenu popup = new PopupMenu(this, anchor);
+        PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
         popup.show();
         return true;

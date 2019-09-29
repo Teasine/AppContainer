@@ -10,5 +10,8 @@
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
+    <style name="FilterPopup" parent="AppTheme">
+        <item name="android:contextPopupMenuStyle">@style/Widget.MaterialComponents.PopupMenu.ContextMenu</item>
+    </style>
 
 </resources>
