@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // action item filtro, añade icono de filter
         speedDialView.addActionItem(
-                new SpeedDialActionItem.Builder((R.id.fabFilter), MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
+                new SpeedDialActionItem.Builder((R.id.filter), MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
                         .setIcon(MaterialDrawableBuilder.IconValue.FILTER_VARIANT) // provide an icon
                         .setColor(Color.WHITE) // set the icon color
                         .setToActionbarSize() // set the icon size
                         .build())
+                        // texto al lado del fab
+                        .setLabel(getString(R.string.filter))
                         .create()
         );
         // action item settings, añade icono de settings
@@ -59,6 +61,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .setColor(Color.WHITE) // set the icon color
                         .setToActionbarSize() // set the icon size
                         .build())
+                        // texto al lado del fab
+                        .setLabel(getString(R.string.settings))
+                        .create()
+        );
+
+        // action item info, añade icono de info
+        speedDialView.addActionItem(
+                new SpeedDialActionItem.Builder(R.id.info, MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
+                        .setIcon(MaterialDrawableBuilder.IconValue.INFORMATION_OUTLINE) // provide an icon
+                        .setColor(Color.WHITE) // set the icon color
+                        .setToActionbarSize() // set the icon size
+                        .build())
+                        // texto al lado del fab
+                        .setLabel(getString(R.string.info))
                         .create()
         );
 
@@ -72,7 +88,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         // cerrar con animacion cuando pulsas
                         speedDialView.close();
-                    case R.id.fabFilter:
+                    case R.id.filter:
+                        // filter action
+
+                        // cerrar el fab con animacion cuando pulsas
+                        speedDialView.close();
+                        return false; // cierra el fab sin animacion
+                    case R.id.info:
                         // filter action
 
                         // cerrar el fab con animacion cuando pulsas
@@ -83,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         });
+
+        // ---------------------------------------------------------------------------------------------------------------
+
     }
 
     @Override
