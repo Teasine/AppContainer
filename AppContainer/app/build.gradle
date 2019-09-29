@@ -34,4 +34,6 @@ dependencies {
 
     implementation 'net.steamcrafted:materialiconlib:1.1.5'
 
+    implementation 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
+
 }
