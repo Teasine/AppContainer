@@ -113,30 +113,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Sydney, Australia,
-        // and move the map's camera to the same location.
         LatLng sydney = new LatLng(-33.852, 151.211);
-
-        // create marker
-        MarkerOptions marker = new MarkerOptions().position(sydney);
-
         googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                .title("Marker in Sydney").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_plastic)));
 
-        // Add a marker in Sydney, Australia,
-        // and move the map's camera to the same location.
+        // Add a marker in antartida,
         LatLng antartida = new LatLng(-79.054148, 26.783465);
         googleMap.addMarker(new MarkerOptions().position(antartida)
-                .title("Marker in Antartida").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(antartida));
+                .title("Marker in Antartida").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_glass)));
 
-        // Add a marker in Sydney, Australia,
+        // Add a marker in argentina
         // and move the map's camera to the same location.
         LatLng argentina = new LatLng(-38.726140, -62.270526);
         googleMap.addMarker(new MarkerOptions().position(argentina)
-                .title("Marker in Argentina").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
+                .title("Marker in Argentina").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_organic)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(argentina));
-
-
+        
     }
 }
