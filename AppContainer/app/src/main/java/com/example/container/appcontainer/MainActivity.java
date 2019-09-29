@@ -1,6 +1,7 @@
 package com.example.container.appcontainer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -12,6 +13,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         speedDialView.close();
                     case R.id.filter:
                         // filter action
-
+                        boolean open = showFilterMenu(findViewById(R.id.filter));
                         // cerrar el fab con animacion cuando pulsas
                         speedDialView.close();
                         return false; // cierra el fab sin animacion
@@ -160,6 +164,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return true;
         }
+    }
+
+
+    public boolean showFilterMenu(View anchor) {
+        PopupMenu popup = new PopupMenu(this, anchor);
+        popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
+        popup.show();
+        return true;
     }
 
 
