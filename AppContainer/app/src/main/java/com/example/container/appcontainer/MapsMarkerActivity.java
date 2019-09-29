@@ -42,6 +42,9 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        //Quito la opcion navegacion
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
+
         //Cambio de estilo de maps
         try {
             // Customise the styling of the base map using a JSON object defined
