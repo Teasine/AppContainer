@@ -18,8 +18,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
-import com.example.container.appcontainer.MapsMarkerActivity;
-
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
     MapsMarkerActivity map = new MapsMarkerActivity(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,5 +119,9 @@ public class MainActivity extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(map);
 
-    }
+    }//OnCreate()
+
+
+
+
 }
