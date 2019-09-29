@@ -4,9 +4,11 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public final class MapsMarkerActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -25,6 +28,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     //DECLARACION DE VARIABLES GLOBALES
     Context context;
     boolean permissionGranted;
+    private static final String TAG = MapsMarkerActivity.class.getSimpleName();
+
 
 
     public MapsMarkerActivity (Context context, boolean permissionGranted){
@@ -37,8 +42,24 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        //Cambio de estilo de maps
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            context, R.raw.style_json));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
+
         //Mi posición
-        if(permissionGranted==true) {
+        if (permissionGranted == true) {
             googleMap.setMyLocationEnabled(true);
         }
 
@@ -68,5 +89,6 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
         // zoom camera
         //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+
     }
 }
