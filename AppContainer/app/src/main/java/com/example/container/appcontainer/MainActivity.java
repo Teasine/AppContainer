@@ -6,11 +6,13 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
-
 
 
     @Override
@@ -121,9 +122,11 @@ public class MainActivity extends AppCompatActivity {
 
         // ---------------------------------------------------------------------------------------------------------------
 
-        WelcomeActivity w = new WelcomeActivity();
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+
         //Creación del mapa
-        MapsMarkerActivity map = new MapsMarkerActivity(this);
+        MapsMarkerActivity map = new MapsMarkerActivity(this, locationManager);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(map);
 
