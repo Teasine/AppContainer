@@ -46,6 +46,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
         //Quito la opcion navegacion
         googleMap.getUiSettings().setMapToolbarEnabled(false);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+
 
         //Cambio de estilo de maps
         try {
@@ -96,7 +98,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
         // zoom camera
         //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
-        
+
         Criteria criteria = new Criteria();
 
         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
