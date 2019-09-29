@@ -1,7 +1,9 @@
 package com.example.container.appcontainer;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,11 +19,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 public class WelcomeActivity extends AppCompatActivity {
 
+    //DECLARACION DE VARIABLES
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
@@ -30,9 +35,14 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button btnSkip, btnNext;
     private PrefManager prefManager;
 
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Compruebo los permisos de location
+        checkLocationPermission();
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
@@ -93,6 +103,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void addBottomDots(int currentPage) {
@@ -197,6 +208,37 @@ public class WelcomeActivity extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             View view = (View) object;
             container.removeView(view);
+        }
+    }
+
+    public boolean checkLocationPermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Asking user if explanation is needed
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions( this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
+            return false;
+        } else {
+            return true;
         }
     }
 }

@@ -27,16 +27,12 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
     //DECLARACION DE VARIABLES GLOBALES
     Context context;
-    boolean permissionGranted;
     private static final String TAG = MapsMarkerActivity.class.getSimpleName();
 
 
-
-    public MapsMarkerActivity (Context context, boolean permissionGranted){
+    public MapsMarkerActivity (Context context){
 
         this.context = context;
-        this.permissionGranted = permissionGranted;
-
     }
 
     @Override
@@ -62,8 +58,10 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
 
         //Mi posición
-        if (permissionGranted == true) {
-            googleMap.setMyLocationEnabled(true);
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+             googleMap.setMyLocationEnabled(true);
         }
 
         // Marker pngs to small bitmaps
