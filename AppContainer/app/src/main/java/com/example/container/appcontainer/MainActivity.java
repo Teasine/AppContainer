@@ -1,7 +1,12 @@
 package com.example.container.appcontainer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -24,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
-    MapsMarkerActivity map = new MapsMarkerActivity(this);
+    boolean permissionGranted;
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         // Include the OnCreate() method here too, as described above.
 
@@ -115,12 +120,45 @@ public class MainActivity extends AppCompatActivity {
 
         // ---------------------------------------------------------------------------------------------------------------
 
+        permissionGranted = checkLocationPermission();
+
         //Creación del mapa
+        MapsMarkerActivity map = new MapsMarkerActivity(this, permissionGranted);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(map);
 
     }//OnCreate()
 
+    public boolean checkLocationPermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Asking user if explanation is needed
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions( this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
 
