@@ -38,7 +38,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     public void onMapReady(GoogleMap googleMap) {
 
         //Mi posición
-        if(permissionGranted==false) {
+        if(permissionGranted==true) {
             googleMap.setMyLocationEnabled(true);
         }
 
