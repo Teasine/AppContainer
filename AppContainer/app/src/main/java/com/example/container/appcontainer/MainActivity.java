@@ -140,9 +140,7 @@ public class MainActivity extends AppCompatActivity {
         // ------------Array checked filtrado---------------------------------------------------
 
         // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
-        for (int i = 0; i < checked.length; i++) {
-            checked[i] = 1;
-        }
+        showAllBins();
 
     }//OnCreate()
 
@@ -180,6 +178,17 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean showFilterMenu(View anchor) {
         PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
+        popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
+        // Antes de mostrar el menu del popup miramos si estaba checked o no, y lo mostramos como tal
+        for (int i = 0; i < checked.length; i++) {
+            if (checked[i] == 1) {
+                // Mostramos que sea checked
+                popup.getMenu().getItem(i).setChecked(true);
+            }
+        }
+        popup.show();
+
+        
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -231,15 +240,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
-        // Antes de mostrar el menu del popup miramos si estaba checked o no, y lo mostramos como tal
-        for (int i = 0; i < checked.length; i++) {
-                if (checked[i] == 1) {
-                    // Mostramos que sea checked
-                    popup.getMenu().getItem(i).setChecked(true);
-                }
-        }
-        popup.show();
         return true;
+    }
+
+    // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
+    public void showAllBins() {
+        for (int i = 0; i < checked.length; i++) {
+            checked[i] = 1;
+        }
     }
 }
