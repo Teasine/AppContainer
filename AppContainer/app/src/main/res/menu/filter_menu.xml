@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/search"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="ola"
-        />
-    <item android:id="@+id/help"
-        android:icon="@drawable/marker_restos"
-        android:title="marker restos" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="all">
+        <item android:id="@+id/plasticFilter"
+            android:icon="@drawable/marker_plastic"
+            android:title="Plastic"
+            />
+        <item android:id="@+id/glassFilter"
+            android:icon="@drawable/marker_glass"
+            android:title="Glass" />
+        <item android:id="@+id/organicFilter"
+            android:icon="@drawable/marker_organic"
+            android:title="Organic" />
+        <item android:id="@+id/paperFilter"
+            android:icon="@drawable/marker_paper"
+            android:title="Paper" />
+        <item android:id="@+id/wasteFilter"
+            android:icon="@drawable/marker_restos"
+            android:title="Waste" />
+    </group>
 </menu>
