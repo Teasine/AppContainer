@@ -3,6 +3,7 @@ package com.example.container.appcontainer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -31,6 +32,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
     Integer[] showOnMap = new Integer[5];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
                         return true; // cierra el fab sin animacion
                     case R.id.info:
                         // info action
-                        startInfoActivity();
+                        //startInfoActivity();
+                        presentActivity(findViewById(R.id.info));
                         // cerrar el fab con animacion cuando pulsas
                         speedDialView.close();
                         return false; // cierra el fab sin animacion
@@ -225,5 +229,21 @@ public class MainActivity extends AppCompatActivity {
     public void startInfoActivity() {
         Intent intent = new Intent(this, InfoActivity.class);
         startActivity(intent);
+    }
+
+    public void presentActivity(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        int[] locationOnScreen = new int[2];
+        view.getLocationOnScreen(locationOnScreen);
+
+        Intent intent = new Intent(this, InfoActivity.class);
+        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_X, locationOnScreen[0]);
+        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_Y, locationOnScreen[1]);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 }
