@@ -32,15 +32,6 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-   /*     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        }); */
-
         final Intent intent = getIntent();
 
         rootLayout = findViewById(R.id.root_layout);
@@ -61,6 +52,7 @@ public class InfoActivity extends AppCompatActivity {
                     public void onGlobalLayout() {
                         revealActivity(revealX, revealY);
                         rootLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
                     }
                 });
 
@@ -103,8 +95,6 @@ public class InfoActivity extends AppCompatActivity {
                     finish();
                 }
             });
-
-
             circularReveal.start();
         }
     }
