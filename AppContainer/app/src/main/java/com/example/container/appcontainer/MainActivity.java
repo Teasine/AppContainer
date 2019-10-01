@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
-    Integer[] checked = new Integer[5];
+    Integer[] showOnMap = new Integer[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
         PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
         // Antes de mostrar el menu del popup miramos si estaba checked o no, y lo mostramos como tal
-        for (int i = 0; i < checked.length; i++) {
-            if (checked[i] == 1) {
+        for (int i = 0; i < showOnMap.length; i++) {
+            if (showOnMap[i] == 1) {
                 // Mostramos que sea checked
                 popup.getMenu().getItem(i).setChecked(true);
             }
@@ -184,24 +184,24 @@ public class MainActivity extends AppCompatActivity {
                 // -- falta implementar el filtrado real de los contenedores
                 switch(item.getItemId()){
                     case R.id.plasticFilter:
-                        if (item.isChecked()) checked[0] = 1;
-                        else checked[0] = 0;
+                        if (item.isChecked()) showOnMap[0] = 1;
+                        else showOnMap[0] = 0;
                         return false;
                     case R.id.glassFilter:
-                        if (item.isChecked()) checked[1] = 1;
-                        else checked[1] = 0;
+                        if (item.isChecked()) showOnMap[1] = 1;
+                        else showOnMap[1] = 0;
                         return false;
                     case R.id.organicFilter:
-                        if (item.isChecked()) checked[2] = 1;
-                        else checked[2] = 0;
+                        if (item.isChecked()) showOnMap[2] = 1;
+                        else showOnMap[2] = 0;
                         return false;
                     case R.id.paperFilter:
-                        if (item.isChecked()) checked[3] = 1;
-                        else checked[3] = 0;
+                        if (item.isChecked()) showOnMap[3] = 1;
+                        else showOnMap[3] = 0;
                         return false;
                     case R.id.wasteFilter:
-                        if (item.isChecked()) checked[4] = 1;
-                        else checked[4] = 0;
+                        if (item.isChecked()) showOnMap[4] = 1;
+                        else showOnMap[4] = 0;
                         return false;
                     default:
                         return false;
@@ -214,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
     public void showAllBins() {
-        for (int i = 0; i < checked.length; i++) {
-            checked[i] = 1;
+        for (int i = 0; i < showOnMap.length; i++) {
+            showOnMap[i] = 1;
         }
     }
 }
