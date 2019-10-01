@@ -8,11 +8,13 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.icu.text.IDNA;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -116,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
                         boolean open = showFilterMenu(findViewById(R.id.filter));
                         return true; // cierra el fab sin animacion
                     case R.id.info:
-                        // filter action
-
+                        // info action
+                        startInfoActivity();
                         // cerrar el fab con animacion cuando pulsas
                         speedDialView.close();
                         return false; // cierra el fab sin animacion
@@ -217,5 +219,11 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < showOnMap.length; i++) {
             showOnMap[i] = 1;
         }
+    }
+
+    // Empezar info activity
+    public void startInfoActivity() {
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
     }
 }
