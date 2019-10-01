@@ -125,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
                         //startInfoActivity();
                         presentActivity(findViewById(R.id.info));
                         // cerrar el fab con animacion cuando pulsas
-                        speedDialView.close();
-                        return false; // cierra el fab sin animacion
+                        // speedDialView.close();
+                        return true; 
                     default:
                         return true; // true to keep the Speed Dial open
                 }
