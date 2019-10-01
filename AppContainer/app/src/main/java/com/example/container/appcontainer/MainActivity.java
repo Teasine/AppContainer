@@ -232,6 +232,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void presentActivity(View view) {
+
+        // https://android.jlelse.eu/a-little-thing-that-matter-how-to-reveal-an-activity-with-circular-revelation-d94f9bfcae28
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(this, view, "transition");
         int revealX = (int) (view.getX() + view.getWidth() / 2);
