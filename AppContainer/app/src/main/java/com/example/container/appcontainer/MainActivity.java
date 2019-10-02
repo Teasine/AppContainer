@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         view.getLocationOnScreen(locationOnScreen);
 
         Intent intent = new Intent(this, InfoActivity.class);
-        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_X, locationOnScreen[0]);
+        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_X, locationOnScreen[0]+250);
         intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_Y, locationOnScreen[1]);
 
         ActivityCompat.startActivity(this, intent, options.toBundle());
