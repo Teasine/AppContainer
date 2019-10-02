@@ -2,15 +2,12 @@ package com.example.container.appcontainer;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -51,6 +48,22 @@ public class InfoActivity extends AppCompatActivity {
                     @Override
                     public void onGlobalLayout() {
                         revealActivity(revealX, revealY);
+
+                        // background colour animation
+                        final int colorFrom = ContextCompat.getColor(getBaseContext(), R.color.colorPrimary);
+                        final int colorTo = ContextCompat.getColor(getBaseContext(), R.color.white);
+                        ValueAnimator colorAnimation = ValueAnimator.ofArgb(colorFrom, colorTo);
+                        colorAnimation.setDuration(750); // milliseconds
+                        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator animator) {
+                                rootLayout.setBackgroundColor((int) animator.getAnimatedValue());
+                            }
+
+                        });
+                        colorAnimation.start();
+
                         rootLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
                     }
