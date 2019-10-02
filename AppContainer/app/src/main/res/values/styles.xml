@@ -6,12 +6,26 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/cardview_light_background</item>
     </style>
+
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
+
     <style name="FilterPopup" parent="AppTheme">
-        <item name="android:contextPopupMenuStyle">@style/Widget.MaterialComponents.PopupMenu.ContextMenu</item>
+        <item name="android:contextPopupMenuStyle">
+            @style/Widget.MaterialComponents.PopupMenu.ContextMenu
+        </item>
     </style>
+
+    <style name="SplashTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SplashTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="SplashTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

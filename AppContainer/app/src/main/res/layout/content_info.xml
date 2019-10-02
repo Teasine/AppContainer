@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/transition_background_info">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare sollicitudin ante sed feugiat. Maecenas porttitor elit id lorem dignissim sodales. Cras finibus lectus eget mauris condimentum vehicula. Vivamus id mattis lorem, ultrices porttitor enim. In at purus viverra, molestie risus ut, euismod nulla. Nulla pretium enim justo, nec pellentesque dolor ullamcorper at. Phasellus ut scelerisque lectus. Nulla placerat molestie odio, ac lobortis orci pulvinar eu. Nullam vulputate elit ac felis pharetra volutpat. Donec turpis mauris, ornare eu ultrices eget, elementum a diam. In nec facilisis mi, nec convallis metus. Mauris ac justo mauris. Praesent mattis mollis nulla, eget fringilla enim interdum non.  Ut in porta magna. Praesent et lorem at tellus sagittis imperdiet. Proin fringilla ultricies hendrerit. Etiam metus orci, consectetur in purus at, tincidunt pellentesque nunc. Morbi vitae diam molestie, mollis augue luctus, vestibulum metus. Nam nisl ligula, tincidunt a dignissim at, bibendum eu est. Nulla sed lacus libero. Aenean vitae tortor sed massa mattis bibendum. Proin purus massa, tempus a diam et, consequat facilisis lorem. Fusce vitae dapibus dolor, quis tempus nibh. Donec ac suscipit ipsum, quis blandit turpis. Vestibulum condimentum vel ipsum et blandit. Vestibulum vitae lacinia est, non pellentesque arcu.  Nunc dignissim congue nisi. Sed congue facilisis egestas. Maecenas neque nunc, mattis at placerat at, consequat vitae elit. Aliquam iaculis ante vel arcu accumsan tincidunt. Maecenas vel orci laoreet, imperdiet nibh et, tempus nisl. Phasellus condimentum pretium est. Mauris pulvinar sem sapien, imperdiet cursus neque interdum id. Donec porta est leo, et tincidunt nunc porttitor imperdiet.  Pellentesque vel gravida augue. Aenean molestie aliquam tortor a vehicula. Vestibulum sit amet aliquet ante. Ut sed libero vulputate, euismod leo sit amet, gravida nisi. Maecenas finibus volutpat mi, vitae lobortis eros facilisis et. Praesent arcu urna, faucibus lobortis erat id, interdum gravida odio. In dictum nunc sed feugiat vestibulum. Integer cursus orci sed sem lobortis imperdiet id sit amet nulla. Curabitur nec libero posuere, scelerisque enim eu, lacinia lacus." />
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -3,16 +3,19 @@ package com.example.container.appcontainer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.icu.text.IDNA;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +32,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
     Integer[] showOnMap = new Integer[5];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +121,12 @@ public class MainActivity extends AppCompatActivity {
                         boolean open = showFilterMenu(findViewById(R.id.filter));
                         return true; // cierra el fab sin animacion
                     case R.id.info:
-                        // filter action
-
+                        // info action
+                        //startInfoActivity();
+                        presentActivity(findViewById(R.id.info));
                         // cerrar el fab con animacion cuando pulsas
-                        speedDialView.close();
-                        return false; // cierra el fab sin animacion
+                        // speedDialView.close();
+                        return true;
                     default:
                         return true; // true to keep the Speed Dial open
                 }
@@ -217,5 +223,29 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < showOnMap.length; i++) {
             showOnMap[i] = 1;
         }
+    }
+
+    // Empezar info activity
+    public void startInfoActivity() {
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
+    }
+
+    public void presentActivity(View view) {
+
+        // https://android.jlelse.eu/a-little-thing-that-matter-how-to-reveal-an-activity-with-circular-revelation-d94f9bfcae28
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        int[] locationOnScreen = new int[2];
+        view.getLocationOnScreen(locationOnScreen);
+
+        Intent intent = new Intent(this, InfoActivity.class);
+        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_X, locationOnScreen[0]+250);
+        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_Y, locationOnScreen[1]);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 }
