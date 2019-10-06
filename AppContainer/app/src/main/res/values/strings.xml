@@ -99,5 +99,13 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="what_is_appcontainer">What is AppContainer?</string>
+    <string name="descriptionAppContainer">AppContainer is a tool that helps you in a more efficient way, saving the enviroment while saving your time!</string>
+    <string name="DescriptionMap">Find the closest recycling containers to your location.</string>
+    <string name="map">Map</string>
+    <string name="filters">Filters</string>
+    <string name="DescriptionInfo">Everything you need to know about recycling.</string>
+    <string name="Info">Info</string>
+    <string name="DescriptionFilters">Constumizable filters and settings that adapt to your needs and preferences</string>
 
 </resources>

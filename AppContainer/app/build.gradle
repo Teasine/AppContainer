@@ -36,4 +36,6 @@ dependencies {
 
     implementation 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+
 }
