@@ -30,7 +30,10 @@
         app:layout_constraintTop_toTopOf="@+id/view_pager"
         app:layout_constraintVertical_bias="0.98" />
 
-    <Button
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        app:materialIcon="chevron_right"
+        app:materialIconSize="60dp"
+
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,11 +51,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:background="@null"
+        android:background="@android:color/transparent"
         android:text="skip"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_pager"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
 

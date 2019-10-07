@@ -46,6 +46,12 @@
             android:contentDescription="TODO"
             android:src="@drawable/location" />
 
+        <Button
+            android:id="@+id/btn_ask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Permisos de localizacion" />
+
     </LinearLayout>
 
 

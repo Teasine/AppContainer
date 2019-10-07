@@ -6,10 +6,10 @@
     <color name="white">#ffffff</color>
 
     <!-- Screens background color-->
-    <color name="bg_screen1">#21315A</color>
-    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen1">#B2D237</color>
+    <color name="bg_screen2">#F5F5F5</color>
     <color name="bg_screen3">#21315A</color>
-    <color name="bg_screen4">#c873f4</color>
+    <color name="bg_screen4">#FFE434</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#d1395c</color>

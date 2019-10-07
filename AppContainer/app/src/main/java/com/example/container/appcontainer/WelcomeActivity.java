@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,8 +33,10 @@ public class WelcomeActivity extends AppCompatActivity {
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
-    private Button btnSkip, btnNext;
+    private Button btnSkip;
+    private ImageView btnNext;
     private PrefManager prefManager;
+    private Button btn_ask_permissions;
 
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
 
@@ -59,7 +62,6 @@ public class WelcomeActivity extends AppCompatActivity {
         dotsLayout =  findViewById(R.id.layoutDots);
         btnSkip = findViewById(R.id.btn_skip);
         btnNext = findViewById(R.id.btn_next);
-
 
         // layouts of all welcome sliders
         // add few more layouts if you want
@@ -101,6 +103,8 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private void addBottomDots(int currentPage) {
@@ -139,9 +143,17 @@ public class WelcomeActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
             addBottomDots(position);
 
-            if(position == 1){
-                //Compruebo los permisos de location
-                checkLocationPermission();
+            //Si está en welcome_slide2 se crea el boton
+            if(position==1) {
+                btn_ask_permissions = findViewById(R.id.btn_ask);
+                btn_ask_permissions.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        //Compruebo los permisos de location
+                        checkLocationPermission();
+                    }
+                });
             }
 
             // changing the next button text 'NEXT' / 'GOT IT'
