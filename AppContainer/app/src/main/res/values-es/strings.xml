@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AppContainer</string>
     <string name="google_maps_key">AIzaSyAgkN-hpzsWKExY1_y1iyZLobI2012vi1k</string>
     <string name="info">Info</string>
-    <string name="settings">Settings</string>
-    <string name="filter">Filter</string>
-    <string name="plastic">Plastic</string>
-    <string name="organic">Organic</string>
-    <string name="waste">Waste</string>
-    <string name="paper">Paper</string>
-    <string name="glass">Glass</string>
+    <string name="settings">Ajustes</string>
+    <string name="filter">Filtro</string>
+    <string name="plastic">Plástico</string>
+    <string name="organic">Orgánico</string>
+    <string name="waste">Residuos</string>
+    <string name="paper">Papel</string>
+    <string name="glass">Vidrio</string>
     <string name="title_activity_info">InfoActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -99,13 +100,13 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="what_is_appcontainer">What is AppContainer?</string>
-    <string name="descriptionAppContainer">AppContainer is a tool that helps you in a more efficient way, saving the enviroment while saving your time!</string>
-    <string name="DescriptionMap">Find the closest recycling containers to your location.</string>
-    <string name="map">Map</string>
-    <string name="filters">Filters</string>
-    <string name="DescriptionInfo">Everything you need to know about recycling.</string>
+    <string name="what_is_appcontainer">¿Qué es AppContainer?</string>
+    <string name="descriptionAppContainer">AppContainer es una herramienta diseñada para ayudarte a reciclar de manera más eficiente, salvando al medio ambiente y ahorrándote a tí tiempo!</string>
+    <string name="DescriptionMap">Encuentra los contenedores de reciclaje más cercanos a tu localización.</string>
+    <string name="map">Mapa</string>
+    <string name="filters">Filtros</string>
+    <string name="DescriptionInfo">Toda la información que necesitas sobre el reciclaje.</string>
     <string name="Info">Info</string>
-    <string name="DescriptionFilters">Costumizable filters and settings that adapt to your needs and preferences</string>
+    <string name="DescriptionFilters">Filtros costumizables y ajustes que se adaptan a tus necesidades y preferencias</string>
 
 </resources>
