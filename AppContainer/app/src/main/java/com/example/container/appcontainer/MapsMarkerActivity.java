@@ -12,6 +12,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -27,12 +28,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public final class MapsMarkerActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     //DECLARACION DE VARIABLES GLOBALES
     Context context;
     private static final String TAG = MapsMarkerActivity.class.getSimpleName();
     LocationManager locationManager;
+    private LogicaFake laLogica;
+
 
 
     public MapsMarkerActivity (Context context, LocationManager locationManager){
@@ -42,11 +49,13 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
 
         //Quito la opcion navegacion
         googleMap.getUiSettings().setMapToolbarEnabled(false);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+        laLogica = new LogicaFake();
 
 
         //Cambio de estilo de maps
@@ -75,9 +84,9 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         // Marker pngs to small bitmaps
         int height = 100;
         int width = 100;
-        Bitmap markerPlastic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_plastic), width, height, false);
-        Bitmap markerGlass = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_glass), width, height, false);
-        Bitmap markerOrganic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_organic), width, height, false);
+        final Bitmap markerPlastic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_plastic), width, height, false);
+        final Bitmap markerGlass = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_glass), width, height, false);
+        final Bitmap markerOrganic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_organic), width, height, false);
 
         // Add a marker in Sydney, Australia,
         LatLng sydney = new LatLng(-33.852, 151.211);
@@ -88,13 +97,6 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         LatLng antartida = new LatLng(-79.054148, 26.783465);
         googleMap.addMarker(new MarkerOptions().position(antartida)
                 .title("Marker in Antartida").icon(BitmapDescriptorFactory.fromBitmap(markerGlass)));
-
-        // Add a marker in argentina
-        // and move the map's camera to the same location.
-        LatLng argentina = new LatLng(-38.726140, -62.270526);
-        googleMap.addMarker(new MarkerOptions().position(argentina)
-                .title("Marker in Argentina").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(argentina));
 
         // zoom camera
         //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
@@ -114,5 +116,30 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                     .build();                   // Creates a CameraPosition from the builder
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
+
+        //Subir imagen al servidor
+        laLogica.obtenerContenedoresValencia(new PeticionarioREST.Callback () {
+            @Override
+            public void respuestaRecibida(int codigo, String cuerpo) {
+                try {
+                    JSONArray jsonArrayMedidas = new JSONArray(cuerpo);
+                    JSONObject object = jsonArrayMedidas.getJSONObject(1);
+
+                    //String longitud = object.getDouble("longitud");
+                    Double longitud = object.getDouble("Longitud");
+                    Double latitud = object.getDouble("Latitud");
+
+                    // Add a marker in argentina
+                    // and move the map's camera to the same location.
+                    LatLng argentina = new LatLng(latitud, longitud);
+                    googleMap.addMarker(new MarkerOptions().position(argentina)
+                            .title("Marker in Argentina").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(argentina));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

@@ -24,13 +24,13 @@ public class LogicaFake {
     } // interface
 
 
-    private String urlServidor = "http://192.168.0.115:8080/";
+    private String urlServidor = "http://192.168.1.139:8080/";
 
 
     // -------------------------------------------------------------------------------------------------------
     //                      --> obtenerContenedoresValencia() --> elCallback: Callback
     // -------------------------------------------------------------------------------------------------------
-    public void obtenerDatosEstacionGandia(PeticionarioREST.Callback elCallback) {
+    public void obtenerContenedoresValencia(PeticionarioREST.Callback elCallback) {
 
         PeticionarioREST elPeticionario = new PeticionarioREST();
 
