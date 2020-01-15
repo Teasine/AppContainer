@@ -90,6 +90,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         final Bitmap markerPlastic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_plastic), width, height, false);
         final Bitmap markerGlass = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_glass), width, height, false);
         final Bitmap markerOrganic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_organic), width, height, false);
+        final Bitmap markerWaste = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_restos), width, height, false);
+        final Bitmap markerPaper = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_paper), width, height, false);
 
         // Add a marker in Sydney, Australia,
         LatLng sydney = new LatLng(-33.852, 151.211);
@@ -141,6 +143,11 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                                     googleMap.addMarker(new MarkerOptions().position(marcador)
                                             .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic)));
                                     break;
+                                case 2:
+                                    // Add a marker
+                                    googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper)));
+                                    break;
                                 case 3:
                                     googleMap.addMarker(new MarkerOptions().position(marcador)
                                             .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
@@ -148,6 +155,10 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                                 case 4:
                                     googleMap.addMarker(new MarkerOptions().position(marcador)
                                             .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass)));
+                                    break;
+                                case 5:
+                                    googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerWaste)));
                                     break;
                                 default:
                                     // code block
