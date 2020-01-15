@@ -16,14 +16,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.icu.text.IDNA;
+import android.location.Criteria;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,6 +37,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
@@ -46,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
     Integer[] showOnMap = new Integer[5];
+    private LocationManager locationManager;
+    private Location location;
+    private Context context;
+    private FusedLocationProviderClient fusedLocationClient;
 
 
     @Override
@@ -54,7 +64,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Include the OnCreate() method here too, as described above.
+        context = this;
+
+        //------------------------------------ Obtengo mi localización ------------------------------------------------
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+
+                            //Creación del mapa
+                            MapsMarkerActivity map = new MapsMarkerActivity(context, locationManager,location);
+                            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+                            mapFragment.getMapAsync(map);
+                        }
+                    }
+                });
 
         // ---------- FAB SPEED DIAL ------------------------------------------------------------------------------------
 
@@ -134,14 +163,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // ---------------------------------------------------------------------------------------------------------------
-
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-
-        //Creación del mapa
-        MapsMarkerActivity map = new MapsMarkerActivity(this, locationManager);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(map);
 
         // ------------Array checked filtrado---------------------------------------------------
 

@@ -11,6 +11,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -39,17 +40,26 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     private static final String TAG = MapsMarkerActivity.class.getSimpleName();
     LocationManager locationManager;
     private LogicaFake laLogica;
+    private Location location;
 
 
 
-    public MapsMarkerActivity (Context context, LocationManager locationManager){
+    public MapsMarkerActivity (Context context_, LocationManager locationManager_, Location location_){
 
-        this.context = context;
-        this.locationManager = locationManager;
+        this.context = context_;
+        this.locationManager = locationManager_;
+        this.location = location_;
     }
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
+
+        //Mi posición
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+        }
 
         //Quito la opcion navegacion
         googleMap.getUiSettings().setMapToolbarEnabled(false);
@@ -73,14 +83,6 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
             Log.e(TAG, "Can't find style. Error: ", e);
         }
 
-
-        //Mi posición
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-             googleMap.setMyLocationEnabled(true);
-        }
-
         // Marker pngs to small bitmaps
         int height = 100;
         int width = 100;
@@ -101,11 +103,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         // zoom camera
         //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
 
-        Criteria criteria = new Criteria();
-
-        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-        if (location != null)
-        {
+        // Animar camara a mi localizacion
+        if (location != null) {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -115,31 +114,37 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                     .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        }
 
-        //Subir imagen al servidor
-        laLogica.obtenerContenedoresValencia(new PeticionarioREST.Callback () {
-            @Override
-            public void respuestaRecibida(int codigo, String cuerpo) {
-                try {
-                    JSONArray jsonArrayMedidas = new JSONArray(cuerpo);
-                    JSONObject object = jsonArrayMedidas.getJSONObject(1);
+            //Obtener contenedores de Valencia del servidor
+            laLogica.obtenerContenedoresValencia(0.2, location.getLatitude(), location.getLongitude(), new PeticionarioREST.Callback() {
+                @Override
+                public void respuestaRecibida(int codigo, String cuerpo) {
+                    try {
+                        JSONArray jsonArrayMedidas = new JSONArray(cuerpo);
 
-                    //String longitud = object.getDouble("longitud");
-                    Double longitud = object.getDouble("Longitud");
-                    Double latitud = object.getDouble("Latitud");
+                        for(int i = 0;i < jsonArrayMedidas.length();i++) {
 
-                    // Add a marker in argentina
-                    // and move the map's camera to the same location.
-                    LatLng argentina = new LatLng(latitud, longitud);
-                    googleMap.addMarker(new MarkerOptions().position(argentina)
-                            .title("Marker in Argentina").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(argentina));
+                            JSONObject object = jsonArrayMedidas.getJSONObject(i);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                            //String longitud = object.getDouble("longitud");
+                            Double longitud = object.getDouble("Longitud");
+                            Double latitud = object.getDouble("Latitud");
+
+                            // Add a marker
+                            LatLng marcador = new LatLng(latitud, longitud);
+                            googleMap.addMarker(new MarkerOptions().position(marcador)
+                                    .title("Marker").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
+
+                           // Move the map's camera to the same location
+                            // googleMap.moveCamera(CameraUpdateFactory.newLatLng(marcador));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+
+        }// si encuentra la localizacion
     }
 }

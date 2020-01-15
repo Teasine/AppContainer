@@ -7,6 +7,8 @@
 
 package com.example.container.appcontainer;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -30,14 +32,18 @@ public class LogicaFake {
     // -------------------------------------------------------------------------------------------------------
     //                      --> obtenerContenedoresValencia() --> elCallback: Callback
     // -------------------------------------------------------------------------------------------------------
-    public void obtenerContenedoresValencia(PeticionarioREST.Callback elCallback) {
+    public void obtenerContenedoresValencia(Double distancia,Double latitud, Double longitud,PeticionarioREST.Callback elCallback) {
 
         PeticionarioREST elPeticionario = new PeticionarioREST();
 
         Map<String, String> params = new HashMap<String, String>();
         JSONObject eljson = new JSONObject(params);
 
-        elPeticionario.hacerPeticionREST("GET", this.urlServidor + "obtenerContenedoresValencia", eljson.toString(), elCallback,
+        //Posicion ficticia del usuario en valencia
+        latitud = 39.470868;
+        longitud = -0.358238;
+
+        elPeticionario.hacerPeticionREST("GET", this.urlServidor + "obtenerContenedoresValencia/" + distancia +"&" + latitud + "&" + longitud, eljson.toString(), elCallback,
                 "application/json; charset=utf-8"
         );
     }
