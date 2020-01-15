@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -81,6 +82,19 @@ public class MainActivity extends AppCompatActivity {
                             MapsMarkerActivity map = new MapsMarkerActivity(context, locationManager,location);
                             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                             mapFragment.getMapAsync(map);
+
+
+                            //Mover controles googleMaps donde queramos
+                            View toolbar = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).
+                                    getParent()).findViewById(Integer.parseInt("4"));
+
+                            // and next place it
+                            RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) toolbar.getLayoutParams();
+                            // position on left bottom
+                            rlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+                            rlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+                            rlp.setMargins(1000000, 0, 0, 80);
+
                         }
                     }
                 });
