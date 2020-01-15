@@ -43,8 +43,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     private Location location;
 
 
-
-    public MapsMarkerActivity (Context context_, LocationManager locationManager_, Location location_){
+    public MapsMarkerActivity(Context context_, LocationManager locationManager_, Location location_) {
 
         this.context = context_;
         this.locationManager = locationManager_;
@@ -122,20 +121,36 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                     try {
                         JSONArray jsonArrayMedidas = new JSONArray(cuerpo);
 
-                        for(int i = 0;i < jsonArrayMedidas.length();i++) {
+                        for (int i = 0; i < jsonArrayMedidas.length(); i++) {
 
                             JSONObject object = jsonArrayMedidas.getJSONObject(i);
 
-                            //String longitud = object.getDouble("longitud");
+                            Integer idTipoContenedor = object.getInt("IdTipoContenedor");
                             Double longitud = object.getDouble("Longitud");
                             Double latitud = object.getDouble("Latitud");
 
-                            // Add a marker
                             LatLng marcador = new LatLng(latitud, longitud);
-                            googleMap.addMarker(new MarkerOptions().position(marcador)
-                                    .title("Marker").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
 
-                           // Move the map's camera to the same location
+                            Log.e("IDTIPOCONTENEDOR", idTipoContenedor.toString());
+
+                            switch (idTipoContenedor) {
+                                case 1:
+                                    // Add a marker
+                                    googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic)));
+                                    break;
+                                case 3:
+                                    googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
+                                    break;
+                                case 4:
+                                    googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass)));
+                                    break;
+                                default:
+                                    // code block
+                            }
+                            // Move the map's camera to the same location
                             // googleMap.moveCamera(CameraUpdateFactory.newLatLng(marcador));
                         }
 
