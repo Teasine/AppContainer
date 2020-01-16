@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,12 +47,14 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     LocationManager locationManager;
     private LogicaFake laLogica;
     private Location location;
-    public List<List<Marker>> marcadores = new ArrayList<>();
+    public List<MarkerOptions> marcadorOptions = new ArrayList<>();
     public List<Marker> marcadoresPaper = new ArrayList<>();
     public List<Marker> marcadoresPlastic = new ArrayList<>();
     public List<Marker> marcadoresWaste = new ArrayList<>();
     public List<Marker> marcadoresOrganic = new ArrayList<>();
     public List<Marker> marcadoresGlass = new ArrayList<>();
+
+    private ClusterManager<MarkerClusterItem> clusterManager;
 
 
     public MapsMarkerActivity(Context context_, LocationManager locationManager_, Location location_) {
@@ -63,6 +66,11 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
+
+        clusterManager = new ClusterManager<>(context, googleMap);
+
+        googleMap.setOnCameraIdleListener(clusterManager);
+        googleMap.setOnMarkerClickListener(clusterManager);
 
         //Mi posición
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -139,28 +147,45 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
                             Log.e("IDTIPOCONTENEDOR", idTipoContenedor.toString());
 
+                            MarkerOptions options;
+
                             switch (idTipoContenedor) {
                                 case 1:
                                     // Add a marker
-                                    marcadoresPlastic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic))));
+                                 /*   marcadoresPlastic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic))));*/
+                                    options = new MarkerOptions().position(marcador)
+                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic));
+                                    marcadorOptions.add(options);
                                     break;
                                 case 2:
                                     // Add a marker
-                                    marcadoresPaper.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper))));
+                                 /*   marcadoresPaper.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper))));*/
+                                    options = new MarkerOptions().position(marcador)
+                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic));
+                                    marcadorOptions.add(options);
                                     break;
                                 case 3:
-                                    marcadoresOrganic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic))));
+                                 /*   marcadoresOrganic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic))));*/
+                                    options = new MarkerOptions().position(marcador)
+                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic));
+                                    marcadorOptions.add(options);
                                     break;
                                 case 4:
-                                    marcadoresGlass.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass))));
+                                 /*   marcadoresGlass.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass))));*/
+                                    options = new MarkerOptions().position(marcador)
+                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic));
+                                    marcadorOptions.add(options);
                                     break;
                                 case 5:
-                                    marcadoresWaste.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerWaste))));
+                                 /*   marcadoresWaste.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerWaste))));*/
+                                    options = new MarkerOptions().position(marcador)
+                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic));
+                                    marcadorOptions.add(options);
                                     break;
                                 default:
                                     // code block
@@ -169,12 +194,9 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                             // googleMap.moveCamera(CameraUpdateFactory.newLatLng(marcador));
                         }
 
-                        marcadores.add(marcadoresPlastic);
-                        marcadores.add(marcadoresGlass);
-                        marcadores.add(marcadoresOrganic);
-                        marcadores.add(marcadoresPaper);
-                        marcadores.add(marcadoresWaste);
-
+                        setRenderer(googleMap);
+                        addClusterItems();
+                        clusterManager.cluster();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -183,5 +205,18 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
             });
 
         }// si encuentra la localizacion
+
+    }
+
+    private void addClusterItems() {
+        for(MarkerOptions markerOptions : marcadorOptions){
+            MarkerClusterItem clusterItem = new MarkerClusterItem(markerOptions.getPosition().latitude, markerOptions.getPosition().longitude, markerOptions.getTitle(), markerOptions.getTitle());
+            clusterManager.addItem(clusterItem);
+        }
+    }
+
+    private void setRenderer(GoogleMap googleMap) {
+        MarkerClusterRenderer<MarkerClusterItem> clusterRenderer = new MarkerClusterRenderer<>(context, googleMap, clusterManager);
+        clusterManager.setRenderer(clusterRenderer);
     }
 }
