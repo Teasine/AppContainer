@@ -28,11 +28,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class MapsMarkerActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -42,6 +46,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     LocationManager locationManager;
     private LogicaFake laLogica;
     private Location location;
+    public List<Marker> marcadoresPapel = new ArrayList<>();
 
 
     public MapsMarkerActivity(Context context_, LocationManager locationManager_, Location location_) {
@@ -85,23 +90,13 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         }
 
         // Marker pngs to small bitmaps
-        int height = 100;
-        int width = 100;
+        int height = 150;
+        int width = 150;
         final Bitmap markerPlastic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_plastic), width, height, false);
         final Bitmap markerGlass = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_glass), width, height, false);
         final Bitmap markerOrganic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_organic), width, height, false);
         final Bitmap markerWaste = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_restos), width, height, false);
         final Bitmap markerPaper = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_paper), width, height, false);
-
-        // Add a marker in Sydney, Australia,
-        LatLng sydney = new LatLng(-33.852, 151.211);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic)));
-
-        // Add a marker in antartida,
-        LatLng antartida = new LatLng(-79.054148, 26.783465);
-        googleMap.addMarker(new MarkerOptions().position(antartida)
-                .title("Marker in Antartida").icon(BitmapDescriptorFactory.fromBitmap(markerGlass)));
 
         // zoom camera
         //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
@@ -145,8 +140,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                                     break;
                                 case 2:
                                     // Add a marker
-                                    googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper)));
+                                    marcadoresPapel.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper))));
                                     break;
                                 case 3:
                                     googleMap.addMarker(new MarkerOptions().position(marcador)

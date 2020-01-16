@@ -37,6 +37,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,11 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
-    Integer[] showOnMap = new Integer[5];
+    Boolean[] showOnMap = new Boolean[5];
     private LocationManager locationManager;
     private Location location;
     private Context context;
     private FusedLocationProviderClient fusedLocationClient;
+    private MapsMarkerActivity map;
 
 
     @Override
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         if (location != null) {
 
                             //Creación del mapa
-                            MapsMarkerActivity map = new MapsMarkerActivity(context, locationManager,location);
+                            map = new MapsMarkerActivity(context, locationManager,location);
                             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                             mapFragment.getMapAsync(map);
 
@@ -191,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
         // Antes de mostrar el menu del popup miramos si estaba checked o no, y lo mostramos como tal
         for (int i = 0; i < showOnMap.length; i++) {
-            if (showOnMap[i] == 1) {
+            if (showOnMap[i]) {
                 // Mostramos que sea checked
                 popup.getMenu().getItem(i).setChecked(true);
             }
@@ -223,40 +225,43 @@ public class MainActivity extends AppCompatActivity {
 
                 // El switch cambia el checked del item dependiendo del item
                 // -- falta implementar el filtrado real de los contenedores
-                switch(item.getItemId()){
+                switch(item.getItemId()) {
                     case R.id.plasticFilter:
-                        if (item.isChecked()) showOnMap[0] = 1;
-                        else showOnMap[0] = 0;
-                        return false;
+                        if (item.isChecked()) showOnMap[0] = true;
+                        else showOnMap[0] = false;
                     case R.id.glassFilter:
-                        if (item.isChecked()) showOnMap[1] = 1;
-                        else showOnMap[1] = 0;
-                        return false;
+                        if (item.isChecked()) showOnMap[1] = true;
+                        else showOnMap[1] = false;
                     case R.id.organicFilter:
-                        if (item.isChecked()) showOnMap[2] = 1;
-                        else showOnMap[2] = 0;
-                        return false;
+                        if (item.isChecked()) showOnMap[2] = true;
+                        else showOnMap[2] = false;
                     case R.id.paperFilter:
-                        if (item.isChecked()) showOnMap[3] = 1;
-                        else showOnMap[3] = 0;
-                        return false;
+                        if (item.isChecked())  {
+                            showOnMap[3] = true;
+                        }
+                        else showOnMap[3] = false;
                     case R.id.wasteFilter:
-                        if (item.isChecked()) showOnMap[4] = 1;
-                        else showOnMap[4] = 0;
-                        return false;
-                    default:
-                        return false;
+                        if (item.isChecked()) showOnMap[4] = true;
+                        else showOnMap[4] = false;
                 }
+                refrescarMarcadoresMapa();
+                return false;
             }
         });
 
         return true;
     }
 
+    public void refrescarMarcadoresMapa() {
+        for(Marker papel : map.marcadoresPapel){
+            papel.setVisible(showOnMap[4]);
+        }
+    }
+
     // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
     public void showAllBins() {
         for (int i = 0; i < showOnMap.length; i++) {
-            showOnMap[i] = 1;
+            showOnMap[i] = true;
         }
     }
 
