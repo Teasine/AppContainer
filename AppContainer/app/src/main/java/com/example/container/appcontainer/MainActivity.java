@@ -48,12 +48,13 @@ import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
-    Boolean[] showOnMap = new Boolean[5];
+    Integer[] showOnMap = new Integer[5];
     private LocationManager locationManager;
     private Location location;
     private Context context;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         if (location != null) {
 
                             //Creación del mapa
-                            map = new MapsMarkerActivity(context, locationManager,location);
+                            map = new MapsMarkerActivity(context, locationManager, location);
                             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                             mapFragment.getMapAsync(map);
 
@@ -193,14 +194,14 @@ public class MainActivity extends AppCompatActivity {
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
         // Antes de mostrar el menu del popup miramos si estaba checked o no, y lo mostramos como tal
         for (int i = 0; i < showOnMap.length; i++) {
-            if (showOnMap[i]) {
+            if (showOnMap[i] == 1) {
                 // Mostramos que sea checked
                 popup.getMenu().getItem(i).setChecked(true);
             }
         }
         popup.show();
 
-        
+
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -225,43 +226,85 @@ public class MainActivity extends AppCompatActivity {
 
                 // El switch cambia el checked del item dependiendo del item
                 // -- falta implementar el filtrado real de los contenedores
-                switch(item.getItemId()) {
+                switch (item.getItemId()) {
                     case R.id.plasticFilter:
-                        if (item.isChecked()) showOnMap[0] = true;
-                        else showOnMap[0] = false;
+                        if (item.isChecked()) showOnMap[0] = 1;
+                        else showOnMap[0] = 0;
+                        refrescarMarcadoresPlastic();
+                        return false;
                     case R.id.glassFilter:
-                        if (item.isChecked()) showOnMap[1] = true;
-                        else showOnMap[1] = false;
+                        if (item.isChecked()) showOnMap[1] = 1;
+                        else showOnMap[1] = 0;
+                        refrescarMarcadoresGlass();
+                        return false;
                     case R.id.organicFilter:
-                        if (item.isChecked()) showOnMap[2] = true;
-                        else showOnMap[2] = false;
+                        if (item.isChecked()) showOnMap[2] = 1;
+                        else showOnMap[2] = 0;
+                        refrescarMarcadoresOrganic();
+                        return false;
                     case R.id.paperFilter:
-                        if (item.isChecked())  {
-                            showOnMap[3] = true;
-                        }
-                        else showOnMap[3] = false;
+                        if (item.isChecked()) showOnMap[3] = 1;
+                        else showOnMap[3] = 0;
+                        refrescarMarcadoresPaper();
+                        return false;
                     case R.id.wasteFilter:
-                        if (item.isChecked()) showOnMap[4] = true;
-                        else showOnMap[4] = false;
+                        if (item.isChecked()) showOnMap[4] = 1;
+                        else showOnMap[4] = 0;
+                        refrescarMarcadoresWaste();
+                        return false;
+                    default:
+                        return false;
                 }
-                refrescarMarcadoresMapa();
-                return false;
             }
         });
 
         return true;
     }
 
-    public void refrescarMarcadoresMapa() {
-        for(Marker papel : map.marcadoresPapel){
-            papel.setVisible(showOnMap[4]);
+    public void refrescarMarcadoresPlastic() {
+        for (Marker marker : map.marcadoresPlastic) {
+            if (showOnMap[0] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
+    }
+
+    public void refrescarMarcadoresGlass() {
+        for (Marker marker : map.marcadoresGlass) {
+            if (showOnMap[1] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
+    }
+
+    public void refrescarMarcadoresOrganic() {
+        for (Marker marker : map.marcadoresOrganic) {
+            if (showOnMap[2] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
+    }
+
+    public void refrescarMarcadoresPaper() {
+        for (Marker marker : map.marcadoresPaper) {
+            if (showOnMap[3] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
+    }
+
+    public void refrescarMarcadoresWaste() {
+        for (Marker marker : map.marcadoresWaste) {
+            if (showOnMap[4] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
         }
     }
 
     // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
     public void showAllBins() {
         for (int i = 0; i < showOnMap.length; i++) {
-            showOnMap[i] = true;
+            showOnMap[i] = 1;
         }
     }
 
@@ -283,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
         view.getLocationOnScreen(locationOnScreen);
 
         Intent intent = new Intent(this, InfoActivity.class);
-        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_X, locationOnScreen[0]+250);
+        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_X, locationOnScreen[0] + 250);
         intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_Y, locationOnScreen[1]);
 
         ActivityCompat.startActivity(this, intent, options.toBundle());

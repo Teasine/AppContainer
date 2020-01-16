@@ -46,7 +46,12 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     LocationManager locationManager;
     private LogicaFake laLogica;
     private Location location;
-    public List<Marker> marcadoresPapel = new ArrayList<>();
+    public List<List<Marker>> marcadores = new ArrayList<>();
+    public List<Marker> marcadoresPaper = new ArrayList<>();
+    public List<Marker> marcadoresPlastic = new ArrayList<>();
+    public List<Marker> marcadoresWaste = new ArrayList<>();
+    public List<Marker> marcadoresOrganic = new ArrayList<>();
+    public List<Marker> marcadoresGlass = new ArrayList<>();
 
 
     public MapsMarkerActivity(Context context_, LocationManager locationManager_, Location location_) {
@@ -103,6 +108,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
         // Animar camara a mi localizacion
         if (location != null) {
+            location.setLatitude(39.470868);
+            location.setLongitude(-0.358238);
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -135,25 +142,25 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                             switch (idTipoContenedor) {
                                 case 1:
                                     // Add a marker
-                                    googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic)));
+                                    marcadoresPlastic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic))));
                                     break;
                                 case 2:
                                     // Add a marker
-                                    marcadoresPapel.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                    marcadoresPaper.add(googleMap.addMarker(new MarkerOptions().position(marcador)
                                             .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper))));
                                     break;
                                 case 3:
-                                    googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic)));
+                                    marcadoresOrganic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic))));
                                     break;
                                 case 4:
-                                    googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass)));
+                                    marcadoresGlass.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass))));
                                     break;
                                 case 5:
-                                    googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerWaste)));
+                                    marcadoresWaste.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerWaste))));
                                     break;
                                 default:
                                     // code block
@@ -161,6 +168,13 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                             // Move the map's camera to the same location
                             // googleMap.moveCamera(CameraUpdateFactory.newLatLng(marcador));
                         }
+
+                        marcadores.add(marcadoresPlastic);
+                        marcadores.add(marcadoresGlass);
+                        marcadores.add(marcadoresOrganic);
+                        marcadores.add(marcadoresPaper);
+                        marcadores.add(marcadoresWaste);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
