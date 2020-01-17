@@ -7,6 +7,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private FusedLocationProviderClient fusedLocationClient;
     private MapsMarkerActivity map;
+    private LottieAnimationView animCargando;
 
 
     @Override
@@ -68,7 +71,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        animCargando = findViewById(R.id.animTrash);
+        animCargando.playAnimation();
+
         context = this;
+
+        //------------------------------------ Animación cargando ------------------------------------------------
+
+        animCargando.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.e("Animation:", "start");
+                animCargando.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.e("Animation:", "end");
+                animCargando.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                Log.e("Animation:", "cancel");
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                Log.e("Animation:", "repeat");
+            }
+        });
+
 
         //------------------------------------ Obtengo mi localización ------------------------------------------------
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -80,12 +113,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
-
                             //Creación del mapa
                             map = new MapsMarkerActivity(context, locationManager, location);
                             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                             mapFragment.getMapAsync(map);
-
 
                             //Mover controles googleMaps donde queramos
                             View toolbar = ((View) mapFragment.getView().findViewById(Integer.parseInt("1")).
@@ -179,10 +210,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ---------------------------------------------------------------------------------------------------------------
-
-        // ------------Array checked filtrado---------------------------------------------------
-
         // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
         showAllBins();
 
@@ -190,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public boolean showFilterMenu(View anchor) {
+
         PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
         // Antes de mostrar el menu del popup miramos si estaba checked o no, y lo mostramos como tal
