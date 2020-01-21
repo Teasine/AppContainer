@@ -32,7 +32,7 @@ public class LogicaFake {
     // -------------------------------------------------------------------------------------------------------
     //                      --> obtenerContenedoresValencia() --> elCallback: Callback
     // -------------------------------------------------------------------------------------------------------
-    public void obtenerContenedoresValencia(Double distancia,Double latitud, Double longitud,PeticionarioREST.Callback elCallback) {
+    public void obtenerContenedoresValencia(Float distancia,Double latitud, Double longitud,PeticionarioREST.Callback elCallback) {
 
         PeticionarioREST elPeticionario = new PeticionarioREST();
 

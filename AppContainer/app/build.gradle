@@ -31,11 +31,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation "com.google.android.material:material:1.1.0-alpha10"
-
+    implementation 'com.xw.repo:bubbleseekbar:3.20'
+    implementation 'com.github.navasmdc:MaterialDesign:1.5@aar'
     implementation 'net.steamcrafted:materialiconlib:1.1.5'
-
     implementation 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
-
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    implementation 'androidx.preference:preference:1.1.0-alpha05'
+
 
 }
