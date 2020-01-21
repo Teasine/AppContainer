@@ -44,19 +44,19 @@ public class MarkerClusterRenderer<T extends ClusterItem> extends DefaultCluster
 
         switch (markerOptions.getTitle()) {
             case "Plastic":
-                markerOptions.icon(markerPlastic).snippet("meme");
+                markerOptions.icon(markerPlastic).snippet(null);
                 break;
             case "Glass":
-                markerOptions.icon(markerGlass).snippet("meme");
+                markerOptions.icon(markerGlass).snippet(null);
                 break;
             case "Organic":
-                markerOptions.icon(markerOrganic).snippet("meme");
+                markerOptions.icon(markerOrganic).snippet(null);
                 break;
             case "Waste":
-                markerOptions.icon(markerWaste).snippet("meme");
+                markerOptions.icon(markerWaste).snippet(null);
                 break;
             case "Paper":
-                markerOptions.icon(markerPaper).snippet("meme");
+                markerOptions.icon(markerPaper).snippet(null);
                 break;
             default:
                 // code block
@@ -66,10 +66,10 @@ public class MarkerClusterRenderer<T extends ClusterItem> extends DefaultCluster
     // Para cambiar el icono de los clusters
     @Override
     protected void onBeforeClusterRendered(Cluster<T> cluster, MarkerOptions markerOptions) {
-        int height = 170;
-        int width = 170;
-        final Bitmap markerOrganic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_organic), width, height, false);
-        final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(markerOrganic);
-        markerOptions.icon(bitmapDescriptor).snippet("meme");
+        int height = 150;
+        int width = 150;
+        final Bitmap clusterMarker = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.cluster), width, height, false);
+        final BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(clusterMarker);
+        markerOptions.icon(bitmapDescriptor);
     }
 }
