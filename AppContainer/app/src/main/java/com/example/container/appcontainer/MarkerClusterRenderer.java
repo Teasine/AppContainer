@@ -23,7 +23,7 @@ public class MarkerClusterRenderer<T extends ClusterItem> extends DefaultCluster
 
     @Override
     protected boolean shouldRenderAsCluster(Cluster cluster) {
-        return cluster.getSize() >= 3;
+        return cluster.getSize() >= 2;
     }
 
     @Override
