@@ -1,54 +1,52 @@
 package com.example.container.appcontainer;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.DialogFragment;
+
 import com.xw.repo.BubbleSeekBar;
 
+import static android.content.Context.MODE_PRIVATE;
 
-public class Ajustes extends Activity {
+public class AjustesDialogFragment extends DialogFragment {
 
+    DialogFragment dialogFragment;
     private CardView ajustesCardView;
-    private BubbleSeekBar seekBarDistancia;
     private Context context;
+
+    private BubbleSeekBar seekBarDistancia;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Button saveButton;
     private Button cancelButton;
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        dialogFragment = this;
+        context = getContext();
 
+        View view = inflater.inflate(R.layout.fragment_ajustes,container,false);
+        BubbleSeekBar seekBarDistancia = view.findViewById(R.id.seekBarRadio);
+        Button saveButton = view.findViewById(R.id.saveButton);
+        Button cancelButton = view.findViewById(R.id.cancelButton);
 
-    public Ajustes(Context context_, CardView ajustesCardView_, BubbleSeekBar seekBarDistancia_, Button saveButton_, Button cancelButton_) {
-        this.context = context_;
-        this.ajustesCardView = ajustesCardView_;
-        this.seekBarDistancia = seekBarDistancia_;
-        this.saveButton = saveButton_;
-        this.cancelButton = cancelButton_;
-
-
-        //seekBarDistancia.setOnSeekBarChangeListener(this);
         preferences = context.getSharedPreferences("Ajustes", MODE_PRIVATE);
         editor = preferences.edit();
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editor.commit();
-                ajustesCardView.setVisibility(View.INVISIBLE);
-            }
-        });
+        saveButton.setOnClickListener(doneAction);
 
-        cancelButton_.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ajustesCardView.setVisibility(View.INVISIBLE);
-            }
-        });
+        cancelButton.setOnClickListener(closeAction);
 
         float radio = preferences.getFloat("Radio", 0.2f);
 
@@ -72,7 +70,6 @@ public class Ajustes extends Activity {
             @Override
 
             public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser){
-
                 switch (progress) {
                     case 200:
                         editor.putFloat("Radio",0.2f);
@@ -115,6 +112,33 @@ public class Ajustes extends Activity {
             }
         });
 
+        return view;
     }
 
+    // Cuando es pulsado el botón entendido
+    View.OnClickListener doneAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Guardamos
+            editor.commit();
+
+            // Cierra el popup
+            dialogFragment.dismiss();
+            dialogFragment.dismissAllowingStateLoss();
+            getFragmentManager().executePendingTransactions();
+        }
+    };
+
+    // Cuando es pulsado el botón cerrar
+    View.OnClickListener closeAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Cierra el popup
+            dialogFragment.dismiss();
+            dialogFragment.dismissAllowingStateLoss();
+            getFragmentManager().executePendingTransactions();
+        }
+    };
+
 }
+

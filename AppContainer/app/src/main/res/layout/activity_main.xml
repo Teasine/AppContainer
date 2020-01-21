@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:sdOverlayLayout="@id/overlay" />
 
-    <androidx.cardview.widget.CardView
+  <!--  <androidx.cardview.widget.CardView
         android:id="@+id/ajustesCardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -130,7 +130,7 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView> -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

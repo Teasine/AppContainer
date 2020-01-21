@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private MapsMarkerActivity map;
     private LottieAnimationView animCargando;
-    private CardView ajustesCardView;
 
 
     @Override
@@ -127,15 +126,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
-        //------------------------------------ AJUSTES ------------------------------------------------------------------------
-        ajustesCardView = findViewById(R.id.ajustesCardView);
-        BubbleSeekBar seekBar= findViewById(R.id.seekBarRadio);
-        Button saveButton = findViewById(R.id.saveButton);
-        Button cancelButton = findViewById(R.id.cancelButton);
-
-        Ajustes ajustes = new Ajustes(this, ajustesCardView, seekBar, saveButton, cancelButton);
-
         // ---------------------------------- FAB SPEED DIAL -------------------------------------------------------------------
 
         // acceder speed dial
@@ -193,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 switch (speedDialActionItem.getId()) {
                     case R.id.settings:
                         // settings action
-                        ajustesCardView.setVisibility(View.VISIBLE);
+                        final AjustesDialogFragment ajustesDialogFragment = new AjustesDialogFragment();
+                        if (!ajustesDialogFragment.isAdded()) ajustesDialogFragment.show(getSupportFragmentManager(), "");
                         speedDialView.close();
                         return true;
                     case R.id.filter:
