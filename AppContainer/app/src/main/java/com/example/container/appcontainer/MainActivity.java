@@ -1,14 +1,18 @@
 package com.example.container.appcontainer;
 
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private MapsMarkerActivity map;
     private CardView ajustesCardView;
+    private ImageView fondo;
 
 
     @Override
@@ -90,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         //------------------------------------ AJUSTES ------------------------------------------------------------------------
         ajustesCardView = findViewById(R.id.ajustesCardView);
         BubbleSeekBar seekBar= findViewById(R.id.seekBarRadio);
+        fondo = findViewById(R.id.fondo);
         Button saveButton = findViewById(R.id.saveButton);
         Ajustes ajustes = new Ajustes(this, ajustesCardView, seekBar,saveButton);
 
@@ -151,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.settings:
                         // settings action
                         ajustesCardView.setVisibility(View.VISIBLE);
+                        //fondo.setBackgroundColor(Color.parseColor("#83FFDAA4"));
                         speedDialView.close();
                         return true;
                     case R.id.filter:

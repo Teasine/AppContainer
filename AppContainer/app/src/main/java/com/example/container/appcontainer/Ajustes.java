@@ -32,6 +32,14 @@ public class Ajustes extends Activity {
         preferences = context.getSharedPreferences("Ajustes", MODE_PRIVATE);
         editor = preferences.edit();
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.commit();
+                ajustesCardView.setVisibility(View.INVISIBLE);
+            }
+        });
+
         float radio = preferences.getFloat("Radio", 0.2f);
 
         if (radio == 0.2f) {
@@ -49,14 +57,6 @@ public class Ajustes extends Activity {
         } else if (radio == 0.8f) {
             seekBarDistancia.setProgress(800);
         }
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editor.commit();
-                ajustesCardView.setVisibility(View.INVISIBLE);
-            }
-        });
 
         seekBarDistancia.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListenerAdapter() {
             @Override
