@@ -37,8 +37,6 @@ dependencies {
     implementation 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     implementation 'androidx.preference:preference:1.1.0-alpha05'
-
-
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
     implementation 'com.airbnb.android:lottie:3.3.0'
 
