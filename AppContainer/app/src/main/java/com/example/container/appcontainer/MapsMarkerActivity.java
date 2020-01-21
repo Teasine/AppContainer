@@ -3,6 +3,7 @@ package com.example.container.appcontainer;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -53,6 +54,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     public List<Marker> marcadoresWaste = new ArrayList<>();
     public List<Marker> marcadoresOrganic = new ArrayList<>();
     public List<Marker> marcadoresGlass = new ArrayList<>();
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     private ClusterManager<MarkerClusterItem> clusterManager;
 
@@ -121,8 +124,14 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                     .build();                   // Creates a CameraPosition from the builder
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
+            //Obtener radio guardado en ajustes
+            preferences = context.getSharedPreferences("Ajustes", MODE_PRIVATE);
+            editor = preferences.edit();
+
+            Float radio = preferences.getFloat("Radio",0.2f);
+
             //Obtener contenedores de Valencia del servidor
-            laLogica.obtenerContenedoresValencia(0.2, location.getLatitude(), location.getLongitude(), new PeticionarioREST.Callback() {
+            laLogica.obtenerContenedoresValencia(radio, location.getLatitude(), location.getLongitude(), new PeticionarioREST.Callback() {
                 @Override
                 public void respuestaRecibida(int codigo, String cuerpo) {
                     try {
@@ -139,6 +148,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                             LatLng marcador = new LatLng(latitud, longitud);
 
                             MarkerOptions options;
+
 
                             switch (idTipoContenedor) {
                                 case 1:

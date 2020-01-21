@@ -1,56 +1,46 @@
 package com.example.container.appcontainer;
 
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.icu.text.IDNA;
-import android.location.Criteria;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
+import com.xw.repo.BubbleSeekBar;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private MapsMarkerActivity map;
     private LottieAnimationView animCargando;
+    private CardView ajustesCardView;
+    private ImageView fondo;
 
 
     @Override
@@ -133,7 +125,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        // ---------- FAB SPEED DIAL ------------------------------------------------------------------------------------
+
+        //------------------------------------ AJUSTES ------------------------------------------------------------------------
+        ajustesCardView = findViewById(R.id.ajustesCardView);
+        BubbleSeekBar seekBar= findViewById(R.id.seekBarRadio);
+        fondo = findViewById(R.id.fondo);
+        Button saveButton = findViewById(R.id.saveButton);
+        Ajustes ajustes = new Ajustes(this, ajustesCardView, seekBar,saveButton);
+
+        // ---------------------------------- FAB SPEED DIAL -------------------------------------------------------------------
 
         // acceder speed dial
         speedDialView = findViewById(R.id.speedDial);
@@ -190,9 +190,10 @@ public class MainActivity extends AppCompatActivity {
                 switch (speedDialActionItem.getId()) {
                     case R.id.settings:
                         // settings action
-
-                        // cerrar con animacion cuando pulsas
+                        ajustesCardView.setVisibility(View.VISIBLE);
+                        //fondo.setBackgroundColor(Color.parseColor("#83FFDAA4"));
                         speedDialView.close();
+                        return true;
                     case R.id.filter:
                         // filter action
                         boolean open = showFilterMenu(findViewById(R.id.filter));
@@ -209,6 +210,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // ---------------------------------------------------------------------------------------------------------------
+
+        // ------------ Array checked filtrado---------------------------------------------------
 
         // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
         showAllBins();
@@ -359,4 +364,5 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
+
 }
