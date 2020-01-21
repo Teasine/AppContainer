@@ -19,13 +19,16 @@ public class Ajustes extends Activity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Button saveButton;
+    private Button cancelButton;
 
 
-    public Ajustes(Context context_, CardView ajustesCardView_, BubbleSeekBar seekBarDistancia_, Button saveButton_) {
+
+    public Ajustes(Context context_, CardView ajustesCardView_, BubbleSeekBar seekBarDistancia_, Button saveButton_, Button cancelButton_) {
         this.context = context_;
         this.ajustesCardView = ajustesCardView_;
         this.seekBarDistancia = seekBarDistancia_;
         this.saveButton = saveButton_;
+        this.cancelButton = cancelButton_;
 
 
         //seekBarDistancia.setOnSeekBarChangeListener(this);
@@ -36,6 +39,13 @@ public class Ajustes extends Activity {
             @Override
             public void onClick(View v) {
                 editor.commit();
+                ajustesCardView.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        cancelButton_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 ajustesCardView.setVisibility(View.INVISIBLE);
             }
         });

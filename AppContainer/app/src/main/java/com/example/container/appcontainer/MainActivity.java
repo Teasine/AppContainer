@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private MapsMarkerActivity map;
     private LottieAnimationView animCargando;
     private CardView ajustesCardView;
-    private ImageView fondo;
 
 
     @Override
@@ -129,9 +128,10 @@ public class MainActivity extends AppCompatActivity {
         //------------------------------------ AJUSTES ------------------------------------------------------------------------
         ajustesCardView = findViewById(R.id.ajustesCardView);
         BubbleSeekBar seekBar= findViewById(R.id.seekBarRadio);
-        fondo = findViewById(R.id.fondo);
         Button saveButton = findViewById(R.id.saveButton);
-        Ajustes ajustes = new Ajustes(this, ajustesCardView, seekBar,saveButton);
+        Button cancelButton = findViewById(R.id.cancelButton);
+
+        Ajustes ajustes = new Ajustes(this, ajustesCardView, seekBar, saveButton, cancelButton);
 
         // ---------------------------------- FAB SPEED DIAL -------------------------------------------------------------------
 
@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.settings:
                         // settings action
                         ajustesCardView.setVisibility(View.VISIBLE);
-                        //fondo.setBackgroundColor(Color.parseColor("#83FFDAA4"));
                         speedDialView.close();
                         return true;
                     case R.id.filter:
