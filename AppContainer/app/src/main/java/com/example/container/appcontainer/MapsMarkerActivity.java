@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public final class MapsMarkerActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -57,8 +58,10 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
-    private ClusterManager<MarkerClusterItem> clusterManager;
-
+    public ClusterManager<MarkerClusterItem> clusterManager;
+    public ClusterAlgorithm clusterAlgorithm = new ClusterAlgorithm();
+    public GoogleMap googleMap;
+    public Collection<MarkerClusterItem> items;
 
     public MapsMarkerActivity(Context context_, LocationManager locationManager_, Location location_) {
 
@@ -71,8 +74,12 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     public void onMapReady(final GoogleMap googleMap) {
 
         clusterManager = new ClusterManager<>(context, googleMap);
-        ClusterAlgorithm clusterAlgorithm = new ClusterAlgorithm();
         clusterManager.setAlgorithm(clusterAlgorithm);
+        this.googleMap = googleMap;
+        /* Para mejores resultados segun SO
+         Or, for better performance, wrap it with PreCachingAlgorithmDecorator, as ClusterManager does by default:
+        clusterManager.setAlgorithm(new PreCachingAlgorithmDecorator<MyClusterItem>(clusterAlgorithm);
+         */
 
         googleMap.setOnCameraIdleListener(clusterManager);
         googleMap.setOnMarkerClickListener(clusterManager);
@@ -99,7 +106,6 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                             context, R.raw.style_json));
-
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
             }
@@ -199,6 +205,9 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                         addClusterItems();
                         clusterManager.cluster();
 
+                        // Guardamos los items en una lista para acceder luego
+                        items = clusterAlgorithm.getItems();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -216,7 +225,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         }
     }
 
-    private void setRenderer(GoogleMap googleMap) {
+    public void setRenderer(GoogleMap googleMap) {
         MarkerClusterRenderer<MarkerClusterItem> clusterRenderer = new MarkerClusterRenderer<>(context, googleMap, clusterManager);
         clusterManager.setRenderer(clusterRenderer);
     }

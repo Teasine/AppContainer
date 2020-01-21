@@ -34,11 +34,14 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.maps.android.clustering.ClusterItem;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 import com.xw.repo.BubbleSeekBar;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
+
+import java.util.Collection;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -262,27 +265,27 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.plasticFilter:
                         if (item.isChecked()) showOnMap[0] = 1;
                         else showOnMap[0] = 0;
-                        refrescarMarcadoresPlastic();
+                        refrescarMarcadores();
                         return false;
                     case R.id.glassFilter:
                         if (item.isChecked()) showOnMap[1] = 1;
                         else showOnMap[1] = 0;
-                        refrescarMarcadoresGlass();
+                        refrescarMarcadores();
                         return false;
                     case R.id.organicFilter:
                         if (item.isChecked()) showOnMap[2] = 1;
                         else showOnMap[2] = 0;
-                        refrescarMarcadoresOrganic();
+                        refrescarMarcadores();
                         return false;
                     case R.id.paperFilter:
                         if (item.isChecked()) showOnMap[3] = 1;
                         else showOnMap[3] = 0;
-                        refrescarMarcadoresPaper();
+                        refrescarMarcadores();
                         return false;
                     case R.id.wasteFilter:
                         if (item.isChecked()) showOnMap[4] = 1;
                         else showOnMap[4] = 0;
-                        refrescarMarcadoresWaste();
+                        refrescarMarcadores();
                         return false;
                     default:
                         return false;
@@ -293,44 +296,38 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void refrescarMarcadoresPlastic() {
-        for (Marker marker : map.marcadoresPlastic) {
-            if (showOnMap[0] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
-    }
+    //-------------------------------------------------------------------------------------------
+    //
+    // -> refrescarMarcadores() ->
+    //
+    // Refresca los marcadores en el mapa
+    //-------------------------------------------------------------------------------------------
+    public void refrescarMarcadores() {
+        // Borramos los items existentes
+        map.clusterManager.clearItems();
 
-    public void refrescarMarcadoresGlass() {
-        for (Marker marker : map.marcadoresGlass) {
-            if (showOnMap[1] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
+        // Para cada item anterior, comprobamos si el filtro está seleccionado y si es así lo
+        // añadimos otra vez
+        for (MarkerClusterItem item : map.items) {
+            if (item.getTitle() == "Plastic" && showOnMap[0] == 1) {
+                map.clusterManager.addItem(item);
+            }
+            if (item.getTitle() == "Glass" && showOnMap[1] == 1) {
+                map.clusterManager.addItem(item);
+            }
+            if (item.getTitle() == "Organic" && showOnMap[2] == 1) {
+                map.clusterManager.addItem(item);
+            }
+            if (item.getTitle() == "Paper" && showOnMap[3] == 1) {
+                map.clusterManager.addItem(item);
+            }
+            if (item.getTitle() == "Waste" && showOnMap[4] == 1) {
+                map.clusterManager.addItem(item);
+            }
         }
-    }
 
-    public void refrescarMarcadoresOrganic() {
-        for (Marker marker : map.marcadoresOrganic) {
-            if (showOnMap[2] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
-    }
-
-    public void refrescarMarcadoresPaper() {
-        for (Marker marker : map.marcadoresPaper) {
-            if (showOnMap[3] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
-    }
-
-    public void refrescarMarcadoresWaste() {
-        for (Marker marker : map.marcadoresWaste) {
-            if (showOnMap[4] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
+        // Rehacemos el clustering
+        map.clusterManager.cluster();
     }
 
     // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
