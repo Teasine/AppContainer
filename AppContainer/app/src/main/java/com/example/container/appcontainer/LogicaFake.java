@@ -26,7 +26,8 @@ public class LogicaFake {
     } // interface
 
 
-    private String urlServidor = "http://appcontainer.sanpetor.upv.edu.es/";
+    //private String urlServidor = "http://appcontainer.sanpetor.upv.edu.es/";
+    private String urlServidor = "https://app-container.herokuapp.com/";
 
 
     // -------------------------------------------------------------------------------------------------------
