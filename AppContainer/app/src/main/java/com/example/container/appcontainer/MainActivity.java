@@ -2,6 +2,7 @@ package com.example.container.appcontainer;
 
 import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,9 +20,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -41,6 +46,8 @@ import com.xw.repo.BubbleSeekBar;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Collection;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -213,11 +220,21 @@ public class MainActivity extends AppCompatActivity {
 
     }//OnCreate()
 
-
     public boolean showFilterMenu(View anchor) {
 
         PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
+
+        Menu menu = popup.getMenu();
+
+        // Forzamos la muestra de los iconos en el menu, solo funciona si las imagenes son pequenyas (max 120px aprox)
+        if(menu instanceof MenuBuilder){
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
+
+        // Infla el menu
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
+
         // Antes de mostrar el menu del popup miramos si estaba checked o no, y lo mostramos como tal
         for (int i = 0; i < showOnMap.length; i++) {
             if (showOnMap[i] == 1) {
