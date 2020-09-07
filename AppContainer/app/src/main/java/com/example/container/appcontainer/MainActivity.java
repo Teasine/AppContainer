@@ -311,31 +311,33 @@ public class MainActivity extends AppCompatActivity {
     // Refresca los marcadores en el mapa
     //-------------------------------------------------------------------------------------------
     public void refrescarMarcadores() {
-        // Borramos los items existentes
-        map.clusterManager.clearItems();
-
         // Para cada item anterior, comprobamos si el filtro está seleccionado y si es así lo
         // añadimos otra vez
-        for (MarkerClusterItem item : map.items) {
-            if (item.getTitle() == "Plastic" && showOnMap[0] == 1) {
-                map.clusterManager.addItem(item);
-            }
-            if (item.getTitle() == "Glass" && showOnMap[1] == 1) {
-                map.clusterManager.addItem(item);
-            }
-            if (item.getTitle() == "Organic" && showOnMap[2] == 1) {
-                map.clusterManager.addItem(item);
-            }
-            if (item.getTitle() == "Paper" && showOnMap[3] == 1) {
-                map.clusterManager.addItem(item);
-            }
-            if (item.getTitle() == "Waste" && showOnMap[4] == 1) {
-                map.clusterManager.addItem(item);
-            }
+        for (Marker marker : map.marcadoresPlastic) {
+            if (showOnMap[0] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
         }
-
-        // Rehacemos el clustering
-        map.clusterManager.cluster();
+        for (Marker marker : map.marcadoresGlass) {
+            if (showOnMap[1] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
+        for (Marker marker : map.marcadoresOrganic) {
+            if (showOnMap[2] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
+        for (Marker marker : map.marcadoresPaper) {
+            if (showOnMap[3] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
+        for (Marker marker : map.marcadoresWaste) {
+            if (showOnMap[4] == 1) {
+                marker.setVisible(true);
+            } else marker.setVisible(false);
+        }
     }
 
     // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
