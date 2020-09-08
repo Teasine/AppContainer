@@ -146,9 +146,12 @@ public class MainActivity extends AppCompatActivity {
         // cambiar icono del fab principal
         speedDialView.setMainFabClosedDrawable(MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
                 .setIcon(MaterialDrawableBuilder.IconValue.DOTS_HORIZONTAL) // provide an icon
-                .setColor(Color.WHITE) // set the icon color
+                .setColor(getResources().getColor(R.color.white)) // set the icon color
                 .setToActionbarSize() // set the icon size
                 .build());
+
+        speedDialView.setMainFabClosedBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        speedDialView.setMainFabOpenedBackgroundColor(getResources().getColor(R.color.colorAccent));
 
         // rotacion de abrir/cerrar fab a 90º para que gire de hor a vert
         speedDialView.setMainFabAnimationRotateAngle(90);
@@ -157,13 +160,14 @@ public class MainActivity extends AppCompatActivity {
         speedDialView.addActionItem(
                 new SpeedDialActionItem.Builder((R.id.filter), MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
                         .setIcon(MaterialDrawableBuilder.IconValue.FILTER_VARIANT) // provide an icon
-                        .setColor(Color.WHITE) // set the icon color
+                        .setColor(getResources().getColor(R.color.white))
                         .setToActionbarSize() // set the icon size
                         .build())
                         // texto al lado del fab
                         .setLabel(getString(R.string.filter))
                         .create()
         );
+        /*
         // action item settings, añade icono de settings
         speedDialView.addActionItem(
                 new SpeedDialActionItem.Builder(R.id.settings, MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
@@ -174,13 +178,13 @@ public class MainActivity extends AppCompatActivity {
                         // texto al lado del fab
                         .setLabel(getString(R.string.settings))
                         .create()
-        );
+        );*/
 
         // action item info, añade icono de info
         speedDialView.addActionItem(
                 new SpeedDialActionItem.Builder(R.id.info, MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
                         .setIcon(MaterialDrawableBuilder.IconValue.INFORMATION_OUTLINE) // provide an icon
-                        .setColor(Color.WHITE) // set the icon color
+                        .setColor(getResources().getColor(R.color.white)) // set icon color
                         .setToActionbarSize() // set the icon size
                         .build())
                         // texto al lado del fab
