@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -38,7 +39,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class MapsMarkerActivity extends AppCompatActivity implements OnMapReadyCallback {
+public final class MapsMarkerActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener, GoogleMap.OnCameraMoveStartedListener,
+        GoogleMap.OnCameraMoveCanceledListener {
 
     //DECLARACION DE VARIABLES GLOBALES
     Context context;
@@ -52,10 +54,10 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     public List<Marker> marcadoresWaste = new ArrayList<>();
     public List<Marker> marcadoresOrganic = new ArrayList<>();
     public List<Marker> marcadoresGlass = new ArrayList<>();
+    public GoogleMap googleMap;
 
 
     public MapsMarkerActivity(Context context_, LocationManager locationManager_, Location location_) {
-
         this.context = context_;
         this.locationManager = locationManager_;
         this.location = location_;
@@ -63,6 +65,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
+        this.googleMap = googleMap;
 
         //Mi posición
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -75,6 +78,14 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         googleMap.getUiSettings().setMapToolbarEnabled(true);
         googleMap.getUiSettings().setZoomControlsEnabled(false);
 
+        // Asignar los listeners para los movimientos de camara
+        googleMap.setOnCameraIdleListener(this);
+        googleMap.setOnCameraMoveStartedListener(this);
+        googleMap.setOnCameraMoveCanceledListener(this);
+
+        // Zoom out maximo que queremos que pueda hacer el user
+        // 5 -> landmass / continent
+        googleMap.setMinZoomPreference(5.0f);
 
         laLogica = new LogicaFake();
 
@@ -183,5 +194,26 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
             });
 
         }// si encuentra la localizacion
+    }
+
+    @Override
+    public void onCameraIdle() {
+        Log.d("Camera", "Camera stopped moving");
+        Log.d("Camera", Float.toString(googleMap.getCameraPosition().zoom));
+        if (googleMap.getCameraPosition().zoom < 17.0f) {
+            Toast.makeText(context, "Zoom in to see the recycling bins", Toast.LENGTH_LONG).show();
+            Log.d("Camera", "Too far away");
+            MainActivity.getInstance().hideAllBins();
+        } else MainActivity.getInstance().refrescarMarcadores();
+    }
+
+    @Override
+    public void onCameraMoveCanceled() {
+        Log.d("Camera", "Camera cancelled moving");
+    }
+
+    @Override
+    public void onCameraMoveStarted(int i) {
+        Log.d("Camera", "Camera started moving");
     }
 }
