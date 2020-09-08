@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#21315A</color>
+    <color name="colorPrimary">#263744</color>
     <color name="colorPrimaryDark">#0b2b4b</color>
-    <color name="colorAccent">#0b2b4b</color>
+    <color name="colorAccent">#E5C38E</color>
     <color name="white">#ffffff</color>
+
+    <!-- INTRO SLIDES -->
 
     <!-- Screens background color-->
     <color name="bg_screen1">#B2D237</color>
