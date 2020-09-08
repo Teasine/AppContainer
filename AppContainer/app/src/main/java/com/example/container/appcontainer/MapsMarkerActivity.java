@@ -148,7 +148,7 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
                             LatLng marcador = new LatLng(latitud, longitud);
 
-                            Log.e("IDTIPOCONTENEDOR", idTipoContenedor.toString());
+                            Log.d("IDTIPOCONTENEDOR", idTipoContenedor.toString());
 
                             switch (idTipoContenedor) {
                                 case 1:
