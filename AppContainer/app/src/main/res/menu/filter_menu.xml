@@ -17,5 +17,8 @@
         <item android:id="@+id/wasteFilter"
             android:icon="@drawable/ic_restos"
             android:title="@string/waste" />
+        <item android:id="@+id/selectAllFilter"
+            android:icon="@drawable/ic_restos"
+            android:title="@string/selectall" />
     </group>
 </menu>

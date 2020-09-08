@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
-    Integer[] showOnMap = new Integer[5];
+    Integer[] showOnMap = new Integer[6];
     private LocationManager locationManager;
     private Location location;
     private Context context;
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean showFilterMenu(View anchor) {
 
-        PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
+        final PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
 
         Menu menu = popup.getMenu();
 
@@ -244,6 +244,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 // cambia el checked del item cuando es pulsado
                 item.setChecked(!item.isChecked());
+
+                // Si deseleccionamos uno, deseleccionamos el check de 'select all'
+                if (item.getItemId() != R.id.selectAllFilter && !item.isChecked()) popup.getMenu().getItem(5).setChecked(false);
 
                 // Keep the popup menu open -------------------------------------------------------
                 item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
@@ -287,6 +290,26 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.wasteFilter:
                         if (item.isChecked()) showOnMap[4] = 1;
                         else showOnMap[4] = 0;
+                        refrescarMarcadores();
+                        return false;
+                    case R.id.selectAllFilter:
+                        // Si lo seleccionamos, mostramos checked todos los filtros
+                        if (item.isChecked()) {
+                            showOnMap[5] = 1;
+                            selectShowAllBins();
+                            // Mostramos todos checked
+                            for (int i = 0; i < popup.getMenu().size(); i++) {
+                                popup.getMenu().getItem(i).setChecked(true);
+                            }
+                        }
+                        // Si lo deseleccionamos, deseleccionamos todos los filtros
+                        else {
+                            // Mostramos todos no checked
+                            for (int i = 0; i < popup.getMenu().size(); i++) {
+                                showOnMap[i] = 0;
+                                popup.getMenu().getItem(i).setChecked(false);
+                            }
+                        }
                         refrescarMarcadores();
                         return false;
                     default:
