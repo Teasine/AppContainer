@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -17,16 +17,23 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".MapsActivity" />
 
-    <!-- Custom Action Bar -->
+    <View android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:background="#E4C291"
+        android:visibility="visible"/>
+
+    <!-- Loading animation -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animTrash"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="200dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="200dp"
-        android:background="#00FFE7B2"
+        android:background="#E4C291"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +48,8 @@
     <com.leinardi.android.speeddial.SpeedDialOverlayLayout
         android:id="@+id/overlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="visible" />
 
     <com.leinardi.android.speeddial.SpeedDialView
         android:id="@+id/speedDial"
@@ -50,11 +58,12 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:sdOverlayLayout="@id/overlay" />
 
-  <!--  <androidx.cardview.widget.CardView
+    <!--  <androidx.cardview.widget.CardView
         android:id="@+id/ajustesCardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

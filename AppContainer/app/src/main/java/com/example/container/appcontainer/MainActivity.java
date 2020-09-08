@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private MapsMarkerActivity map;
     private LottieAnimationView animCargando;
+    private View animBackground;
 
 
     @Override
@@ -73,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
         animCargando = findViewById(R.id.animTrash);
         animCargando.playAnimation();
+
+        animBackground = findViewById(R.id.background);
+
+        // acceder speed dial
+        speedDialView = findViewById(R.id.speedDial);
 
         context = this;
 
@@ -89,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animator animation) {
                 Log.e("Animation:", "end");
                 animCargando.setVisibility(View.GONE);
+                animBackground.setVisibility(View.GONE);
+                speedDialView.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -134,9 +142,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         // ---------------------------------- FAB SPEED DIAL -------------------------------------------------------------------
-
-        // acceder speed dial
-        speedDialView = findViewById(R.id.speedDial);
 
         // cambiar icono del fab principal
         speedDialView.setMainFabClosedDrawable(MaterialDrawableBuilder.with(this.getBaseContext()) // provide a context
