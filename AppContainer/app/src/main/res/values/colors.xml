@@ -8,22 +8,22 @@
     <!-- INTRO SLIDES -->
 
     <!-- Screens background color-->
-    <color name="bg_screen1">#B2D237</color>
-    <color name="bg_screen2">#F5F5F5</color>
-    <color name="bg_screen3">#21315A</color>
-    <color name="bg_screen4">#FFE434</color>
+    <color name="bg_screen1">#E5C38E</color>
+    <color name="bg_screen2">#E5C38E</color>
+    <color name="bg_screen3">#E5C38E</color>
+    <color name="bg_screen4">#E5C38E</color>
 
     <!-- dots inactive colors -->
-    <color name="dot_dark_screen1">#d1395c</color>
-    <color name="dot_dark_screen2">#14a895</color>
-    <color name="dot_dark_screen3">#2278d4</color>
-    <color name="dot_dark_screen4">#a854d4</color>
+    <color name="dot_dark_screen1">#263744</color>
+    <color name="dot_dark_screen2">#263744</color>
+    <color name="dot_dark_screen3">#263744</color>
+    <color name="dot_dark_screen4">#263744</color>
 
     <!-- dots active colors -->
-    <color name="dot_light_screen1">#f98da5</color>
-    <color name="dot_light_screen2">#8cf9eb</color>
-    <color name="dot_light_screen3">#93c6fd</color>
-    <color name="dot_light_screen4">#e4b5fc</color>
+    <color name="dot_light_screen1">#ffffff</color>
+    <color name="dot_light_screen2">#ffffff</color>
+    <color name="dot_light_screen3">#ffffff</color>
+    <color name="dot_light_screen4">#ffffff</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>
