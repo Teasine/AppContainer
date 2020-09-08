@@ -103,7 +103,8 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-
+        // En la primera pantalla no se puede hacer skip porque hacen falta los permisos
+        btnSkip.setVisibility(View.GONE);
 
     }
 
@@ -145,15 +146,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
             //Si está en welcome_slide2 se crea el boton
             if(position==1) {
-                btn_ask_permissions = findViewById(R.id.btn_ask);
-                btn_ask_permissions.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        //Compruebo los permisos de location
-                        checkLocationPermission();
-                    }
-                });
+                //Compruebo los permisos de location
+                checkLocationPermission();
             }
 
             // changing the next button text 'NEXT' / 'GOT IT'
