@@ -107,5 +107,6 @@
     <string name="DescriptionInfo">Everything you need to know about recycling.</string>
     <string name="Info">Info</string>
     <string name="DescriptionFilters">Costumizable filters and settings that adapt to your needs and preferences</string>
+    <string name="selectall">Select All</string>
 
 </resources>

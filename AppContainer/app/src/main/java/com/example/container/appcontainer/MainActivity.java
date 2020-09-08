@@ -1,37 +1,22 @@
 package com.example.container.appcontainer;
 
-import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
-import android.Manifest;
 import android.animation.Animator;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -39,24 +24,18 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.maps.android.clustering.ClusterItem;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
-import com.xw.repo.BubbleSeekBar;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Collection;
-
-import static android.widget.Toast.LENGTH_SHORT;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //DECLARACION DE VARIABLES GLOBALES
     SpeedDialView speedDialView;
-    Integer[] showOnMap = new Integer[5];
+    Integer[] showOnMap = new Integer[6];
     private LocationManager locationManager;
     private Location location;
     private Context context;
@@ -64,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
     private MapsMarkerActivity map;
     private LottieAnimationView animCargando;
     private View animBackground;
+    private static MainActivity instance;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        instance = this;
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -225,13 +206,17 @@ public class MainActivity extends AppCompatActivity {
         // ------------ Array checked filtrado---------------------------------------------------
 
         // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
-        showAllBins();
+        selectShowAllBins();
 
     }//OnCreate()
 
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
     public boolean showFilterMenu(View anchor) {
 
-        PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
+        final PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
 
         Menu menu = popup.getMenu();
 
@@ -259,6 +244,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 // cambia el checked del item cuando es pulsado
                 item.setChecked(!item.isChecked());
+
+                // Si deseleccionamos uno, deseleccionamos el check de 'select all'
+                if (item.getItemId() != R.id.selectAllFilter && !item.isChecked()) popup.getMenu().getItem(5).setChecked(false);
 
                 // Keep the popup menu open -------------------------------------------------------
                 item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
@@ -302,6 +290,26 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.wasteFilter:
                         if (item.isChecked()) showOnMap[4] = 1;
                         else showOnMap[4] = 0;
+                        refrescarMarcadores();
+                        return false;
+                    case R.id.selectAllFilter:
+                        // Si lo seleccionamos, mostramos checked todos los filtros
+                        if (item.isChecked()) {
+                            showOnMap[5] = 1;
+                            selectShowAllBins();
+                            // Mostramos todos checked
+                            for (int i = 0; i < popup.getMenu().size(); i++) {
+                                popup.getMenu().getItem(i).setChecked(true);
+                            }
+                        }
+                        // Si lo deseleccionamos, deseleccionamos todos los filtros
+                        else {
+                            // Mostramos todos no checked
+                            for (int i = 0; i < popup.getMenu().size(); i++) {
+                                showOnMap[i] = 0;
+                                popup.getMenu().getItem(i).setChecked(false);
+                            }
+                        }
                         refrescarMarcadores();
                         return false;
                     default:
@@ -350,18 +358,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Hacemos checked todos los filtros al iniciar la app (aparecen todos los contenedores)
-    public void showAllBins() {
+    public void selectShowAllBins() {
         for (int i = 0; i < showOnMap.length; i++) {
             showOnMap[i] = 1;
         }
     }
 
-    // Empezar info activity
-    public void startInfoActivity() {
-        Intent intent = new Intent(this, InfoActivity.class);
-        startActivity(intent);
+    //-------------------------------------------------------------------------------------------
+    //
+    // -> hideAllBins() ->
+    //
+    // Escondemos todos los contenedores
+    //-------------------------------------------------------------------------------------------
+    public void hideAllBins() {
+        // Para cada marcador, lo escondemos
+        for (List<Marker> listaMarcadores : map.marcadores) {
+            for (Marker marker : listaMarcadores) {
+                marker.setVisible(false);
+            }
+        }
     }
 
+    // Empezar info activity
     public void presentActivity(View view) {
 
         // https://android.jlelse.eu/a-little-thing-that-matter-how-to-reveal-an-activity-with-circular-revelation-d94f9bfcae28
