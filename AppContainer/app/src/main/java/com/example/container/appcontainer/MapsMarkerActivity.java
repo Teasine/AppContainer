@@ -3,7 +3,6 @@ package com.example.container.appcontainer;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -31,14 +30,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.clustering.ClusterManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public final class MapsMarkerActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -49,19 +46,13 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
     LocationManager locationManager;
     private LogicaFake laLogica;
     private Location location;
-    public List<MarkerOptions> marcadorOptions = new ArrayList<>();
+    public List<List<Marker>> marcadores = new ArrayList<>();
     public List<Marker> marcadoresPaper = new ArrayList<>();
     public List<Marker> marcadoresPlastic = new ArrayList<>();
     public List<Marker> marcadoresWaste = new ArrayList<>();
     public List<Marker> marcadoresOrganic = new ArrayList<>();
     public List<Marker> marcadoresGlass = new ArrayList<>();
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
-    public ClusterManager<MarkerClusterItem> clusterManager;
-    public ClusterAlgorithm clusterAlgorithm = new ClusterAlgorithm();
-    public GoogleMap googleMap;
-    public Collection<MarkerClusterItem> items;
 
     public MapsMarkerActivity(Context context_, LocationManager locationManager_, Location location_) {
 
@@ -72,17 +63,6 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-
-        clusterManager = new ClusterManager<>(context, googleMap);
-        clusterManager.setAlgorithm(clusterAlgorithm);
-        this.googleMap = googleMap;
-        /* Para mejores resultados segun SO
-         Or, for better performance, wrap it with PreCachingAlgorithmDecorator, as ClusterManager does by default:
-        clusterManager.setAlgorithm(new PreCachingAlgorithmDecorator<MyClusterItem>(clusterAlgorithm);
-         */
-
-        googleMap.setOnCameraIdleListener(clusterManager);
-        googleMap.setOnMarkerClickListener(clusterManager);
 
         //Mi posición
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -106,12 +86,22 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                             context, R.raw.style_json));
+
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
             }
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "Can't find style. Error: ", e);
         }
+
+        // Marker pngs to small bitmaps
+        int height = 150;
+        int width = 150;
+        final Bitmap markerPlastic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_plastic), width, height, false);
+        final Bitmap markerGlass = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_glass), width, height, false);
+        final Bitmap markerOrganic = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_organic), width, height, false);
+        final Bitmap markerWaste = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_restos), width, height, false);
+        final Bitmap markerPaper = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_paper), width, height, false);
 
         // zoom camera
         //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
@@ -130,14 +120,8 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                     .build();                   // Creates a CameraPosition from the builder
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-            //Obtener radio guardado en ajustes
-            preferences = context.getSharedPreferences("Ajustes", MODE_PRIVATE);
-            editor = preferences.edit();
-
-            Float radio = preferences.getFloat("Radio",0.2f);
-
             //Obtener contenedores de Valencia del servidor
-            laLogica.obtenerContenedoresValencia(radio, location.getLatitude(), location.getLongitude(), new PeticionarioREST.Callback() {
+            laLogica.obtenerContenedoresValencia(0.2f, location.getLatitude(), location.getLongitude(), new PeticionarioREST.Callback() {
                 @Override
                 public void respuestaRecibida(int codigo, String cuerpo) {
                     try {
@@ -153,46 +137,30 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
 
                             LatLng marcador = new LatLng(latitud, longitud);
 
-                            MarkerOptions options;
-
+                            Log.e("IDTIPOCONTENEDOR", idTipoContenedor.toString());
 
                             switch (idTipoContenedor) {
                                 case 1:
                                     // Add a marker
-                                 /*   marcadoresPlastic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic))));*/
-                                    options = new MarkerOptions().position(marcador)
-                                            .title("Plastic");
-                                    marcadorOptions.add(options);
+                                    marcadoresPlastic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Plastic").icon(BitmapDescriptorFactory.fromBitmap(markerPlastic))));
                                     break;
                                 case 2:
                                     // Add a marker
-                                 /*   marcadoresPaper.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper))));*/
-                                    options = new MarkerOptions().position(marcador)
-                                            .title("Paper");
-                                    marcadorOptions.add(options);
+                                    marcadoresPaper.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Paper").icon(BitmapDescriptorFactory.fromBitmap(markerPaper))));
                                     break;
                                 case 3:
-                                 /*   marcadoresOrganic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic))));*/
-                                    options = new MarkerOptions().position(marcador)
-                                            .title("Organic");
-                                    marcadorOptions.add(options);
+                                    marcadoresOrganic.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Organic").icon(BitmapDescriptorFactory.fromBitmap(markerOrganic))));
                                     break;
                                 case 4:
-                                 /*   marcadoresGlass.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass))));*/
-                                    options = new MarkerOptions().position(marcador)
-                                            .title("Glass");
-                                    marcadorOptions.add(options);
+                                    marcadoresGlass.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Glass").icon(BitmapDescriptorFactory.fromBitmap(markerGlass))));
                                     break;
                                 case 5:
-                                 /*   marcadoresWaste.add(googleMap.addMarker(new MarkerOptions().position(marcador)
-                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerWaste))));*/
-                                    options = new MarkerOptions().position(marcador)
-                                            .title("Waste");
-                                    marcadorOptions.add(options);
+                                    marcadoresWaste.add(googleMap.addMarker(new MarkerOptions().position(marcador)
+                                            .title("Waste").icon(BitmapDescriptorFactory.fromBitmap(markerWaste))));
                                     break;
                                 default:
                                     // code block
@@ -201,12 +169,12 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
                             // googleMap.moveCamera(CameraUpdateFactory.newLatLng(marcador));
                         }
 
-                        setRenderer(googleMap);
-                        addClusterItems();
-                        clusterManager.cluster();
+                        marcadores.add(marcadoresPlastic);
+                        marcadores.add(marcadoresGlass);
+                        marcadores.add(marcadoresOrganic);
+                        marcadores.add(marcadoresPaper);
+                        marcadores.add(marcadoresWaste);
 
-                        // Guardamos los items en una lista para acceder luego
-                        items = clusterAlgorithm.getItems();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -215,18 +183,5 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
             });
 
         }// si encuentra la localizacion
-
-    }
-
-    private void addClusterItems() {
-        for(MarkerOptions markerOptions : marcadorOptions){
-            MarkerClusterItem clusterItem = new MarkerClusterItem(markerOptions.getPosition().latitude, markerOptions.getPosition().longitude, markerOptions.getTitle(), markerOptions.getTitle());
-            clusterManager.addItem(clusterItem);
-        }
-    }
-
-    public void setRenderer(GoogleMap googleMap) {
-        MarkerClusterRenderer<MarkerClusterItem> clusterRenderer = new MarkerClusterRenderer<>(context, googleMap, clusterManager);
-        clusterManager.setRenderer(clusterRenderer);
     }
 }
