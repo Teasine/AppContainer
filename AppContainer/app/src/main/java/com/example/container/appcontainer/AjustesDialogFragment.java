@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class AjustesDialogFragment extends DialogFragment {
     private CardView glassCard;
     private CardView organicCard;
     private CardView wasterCard;
-    private Button cancelButton;
+    private ImageView cancelButton;
 
     @Nullable
     @Override
@@ -44,7 +45,6 @@ public class AjustesDialogFragment extends DialogFragment {
         context = getContext();
 
         View view = inflater.inflate(R.layout.fragment_ajustes,container,false);
-
 
         plasticCard = view.findViewById(R.id.Plastic);
         plasticCard.setOnClickListener(collapseExpandTextView);
@@ -87,7 +87,8 @@ public class AjustesDialogFragment extends DialogFragment {
             // Obteniendo el texto que se va a desplegar y contraer desde el parent
             View parent = ((ViewGroup) v).getChildAt(0);
             View linearLayout = ((ViewGroup) parent).getChildAt(0);
-            View text = ((ViewGroup) linearLayout).getChildAt(1);
+            View linearLayout2 = ((ViewGroup) linearLayout).getChildAt(0);
+            View text = ((ViewGroup) linearLayout2).getChildAt(1);
 
             if (text.getVisibility() == View.GONE) {
                 // it's collapsed - expand it
