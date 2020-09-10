@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -180,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (speedDialActionItem.getId()) {
                     case R.id.settings:
                         // settings action
-                        final AjustesDialogFragment ajustesDialogFragment = new AjustesDialogFragment();
+                        /*final AjustesDialogFragment ajustesDialogFragment = new AjustesDialogFragment();
                         if (!ajustesDialogFragment.isAdded()) ajustesDialogFragment.show(getSupportFragmentManager(), "");
-                        speedDialView.close();
+                        speedDialView.close();*/
                         return true;
                     case R.id.filter:
                         // filter action
@@ -191,9 +192,12 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.info:
                         // info action
                         //startInfoActivity();
-                        presentActivity(findViewById(R.id.info));
+                        //presentActivity(findViewById(R.id.info));
                         // cerrar el fab con animacion cuando pulsas
                         // speedDialView.close();
+                        final AjustesDialogFragment ajustesDialogFragment = new AjustesDialogFragment();
+                        if (!ajustesDialogFragment.isAdded()) ajustesDialogFragment.show(getSupportFragmentManager(), "");
+                        speedDialView.close();
                         return true;
                     default:
                         return true; // true to keep the Speed Dial open
@@ -214,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
         return instance;
     }
 
+    @SuppressLint("RestrictedApi")
     public boolean showFilterMenu(View anchor) {
 
         final PopupMenu popup = new PopupMenu(this, anchor, R.style.FilterPopup);
