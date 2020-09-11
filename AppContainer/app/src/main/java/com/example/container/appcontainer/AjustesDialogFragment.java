@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Layout;
+import android.transition.Fade;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -36,7 +38,7 @@ public class AjustesDialogFragment extends DialogFragment {
     private CardView glassCard;
     private CardView organicCard;
     private CardView wasterCard;
-    private ImageView cancelButton;
+    private ImageView closeButton;
 
     @Nullable
     @Override
@@ -61,8 +63,8 @@ public class AjustesDialogFragment extends DialogFragment {
         wasterCard = view.findViewById(R.id.Waste);
         wasterCard.setOnClickListener(collapseExpandTextView);
 
-        cancelButton = view.findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(closeAction);
+        closeButton = view.findViewById(R.id.cancelButton);
+        closeButton.setOnClickListener(closeAction);
 
         return view;
     }
@@ -90,10 +92,34 @@ public class AjustesDialogFragment extends DialogFragment {
             View linearLayout2 = ((ViewGroup) linearLayout).getChildAt(0);
             View text = ((ViewGroup) linearLayout2).getChildAt(1);
 
+            View linearLayout3 = ((ViewGroup) linearLayout2).getChildAt(0);
+            View dropDownButton = ((ViewGroup) linearLayout3).getChildAt(2);
+
+
+
             if (text.getVisibility() == View.GONE) {
+                ObjectAnimator anim = ObjectAnimator.ofFloat(dropDownButton, "rotation",0, 180);
+                anim.setDuration(300);
+                anim.start();
+
+                // Nice animation
+                text.animate().translationY(0);
+                Fade mFade = new Fade(Fade.IN);
+                TransitionManager.beginDelayedTransition((ViewGroup) v, mFade);
+
                 // it's collapsed - expand it
                 text.setVisibility(View.VISIBLE);
+
             } else {
+                ObjectAnimator anim = ObjectAnimator.ofFloat(dropDownButton, "rotation",180, 0);
+                anim.setDuration(300);
+                anim.start();
+
+                // Nice animation
+                text.animate().translationY(text.getHeight());
+                Fade mFade = new Fade(Fade.OUT);
+                TransitionManager.beginDelayedTransition((ViewGroup) v, mFade);
+
                 // it's expanded - collapse it
                 text.setVisibility(View.GONE);
             }

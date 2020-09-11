@@ -5,40 +5,46 @@
     android:id="@+id/pop_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="@color/sd_overlay_color"
+    android:orientation="vertical">
 
+    <!-- HEADER -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingRight="5dp">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="40dp"
             android:layout_weight="1"
             android:text="HOW TO"
+            android:textColor="@color/colorPrimary"
             android:textSize="36sp" />
 
         <ImageView
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_weight="0.1"
             android:text="@android:string/cancel"
+            android:tint="@color/colorPrimary"
             app:srcCompat="@drawable/close" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbarSize="0dp"
+        android:scrollbarThumbVertical="@null">
 
 
         <LinearLayout
@@ -49,7 +55,6 @@
             android:paddingRight="20dp"
             android:paddingBottom="20dp">
 
-            <!-- HEADER -->
 
             <!-- PLASTIC  CARD -->
             <com.google.android.material.card.MaterialCardView
@@ -59,7 +64,153 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="30dp"
+                app:rippleColor="@color/colorPrimary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
+
+                        <!-- Title, secondary and supporting text -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_weight="0"
+                                app:srcCompat="@drawable/marker_plastic" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Plastic"
+                                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="7dp"
+                                android:layout_weight="0.03"
+                                android:tint="@color/colorPrimary"
+                                app:srcCompat="@drawable/arrow_down" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1"
+                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- PAPER  CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/Paper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="30dp"
+                app:rippleColor="@color/colorPrimary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
+
+                        <!-- Title, secondary and supporting text -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_weight="0"
+                                app:srcCompat="@drawable/marker_paper" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Paper"
+                                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="7dp"
+                                android:layout_weight="0.03"
+                                android:tint="@color/colorPrimary"
+                                app:srcCompat="@drawable/arrow_down" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1"
+                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- GLASS  CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/Glass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="30dp"
+                app:rippleColor="@color/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,7 +236,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_weight="0"
-                                app:srcCompat="@drawable/marker_plastic" />
+                                app:srcCompat="@drawable/marker_glass" />
 
                             <TextView
                                 android:layout_width="0dp"
@@ -93,15 +244,16 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Plastic"
+                                android:text="Glass"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
-                                android:id="@+id/imageView6"
+                                android:id="@+id/Imafe"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="7dp"
                                 android:layout_weight="0.03"
+                                android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/arrow_down" />
                         </LinearLayout>
 
@@ -112,142 +264,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="fksndfksaghdsfioghdfgihdfighisdhgufdhszgishgdia"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:visibility="visible" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- PAPER  CARD -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/Paper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="30dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <!-- Title, secondary and supporting text -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="59dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/image3View"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2"
-                                app:srcCompat="@drawable/marker_paper" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="20dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Paper"
-                                android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                            <ImageView
-                                android:id="@+id/imageVidew6"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2"
-                                app:srcCompat="@drawable/arrow_down" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:text="fksndfksaghdsfioghdfgihdfighisdhgufdhszgishgdia"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:visibility="gone" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <!-- GLASS  CARD -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/Glass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="30dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <!-- Title, secondary and supporting text -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="59dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/imageVidwew"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2"
-                                app:srcCompat="@drawable/marker_glass" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="20dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Glass"
-                                android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                            <ImageView
-                                android:id="@+id/imageVidsew6"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2"
-                                app:srcCompat="@drawable/arrow_down" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:text="fksndfksaghdsfioghdfgihdfighisdhgufdhszgishgdia"
+                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
@@ -264,8 +281,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="30dp"
+                app:rippleColor="@color/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -274,47 +293,50 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
 
                         <!-- Title, secondary and supporting text -->
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="59dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:id="@+id/imageVasdiew"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_weight="0"
                                 app:srcCompat="@drawable/marker_organic" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:text="Organic"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
-                                android:id="@+id/imagesaView6"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_weight="0.2"
+                                android:layout_marginRight="7dp"
+                                android:layout_weight="0.03"
+                                android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/arrow_down" />
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="fksndfksaghdsfioghdfgihdfighisdhgufdhszgishgdia"
+                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
@@ -330,7 +352,11 @@
                 android:id="@+id/Waste"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="30dp"
+                app:rippleColor="@color/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -339,47 +365,50 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
 
                         <!-- Title, secondary and supporting text -->
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="59dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:id="@+id/imaasgeView"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_weight="0"
                                 app:srcCompat="@drawable/marker_restos" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:text="Waste"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
-                                android:id="@+id/imaageView6"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_weight="0.2"
+                                android:layout_marginRight="7dp"
+                                android:layout_weight="0.03"
+                                android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/arrow_down" />
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="fksndfksaghdsfioghdfgihdfighisdhgufdhszgishgdia"
+                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
