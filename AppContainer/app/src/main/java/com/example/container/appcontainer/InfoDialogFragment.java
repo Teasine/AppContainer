@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Layout;
 import android.transition.Fade;
@@ -19,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +49,7 @@ public class InfoDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dialogFragment = this;
+
         context = getContext();
 
         View view = inflater.inflate(R.layout.fragment_info,container,false);
@@ -152,9 +153,19 @@ public class InfoDialogFragment extends DialogFragment {
         Window window = getDialog().getWindow();
         window.setLayout(width-30, height-120);
         window.setGravity(Gravity.CENTER);
+    }
 
+    @Override public void onStart() {
+        super.onStart();
 
+        // Ponemos el dimAmount a 0 para que no haya un fondo negro transparente detrás
+        // del popup, ya que el fab ya nos crea una transparencia blanca que es la que
+        // queremos
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams windowParams = window.getAttributes();
+        windowParams.dimAmount = 0.0f;
 
+        window.setAttributes(windowParams);
     }
 
 }
