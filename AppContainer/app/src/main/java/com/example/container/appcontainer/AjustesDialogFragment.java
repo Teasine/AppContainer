@@ -92,17 +92,18 @@ public class AjustesDialogFragment extends DialogFragment {
             View linearLayout2 = ((ViewGroup) linearLayout).getChildAt(0);
             View text = ((ViewGroup) linearLayout2).getChildAt(1);
 
+            // Obteniendo el icono para rotarlo
             View linearLayout3 = ((ViewGroup) linearLayout2).getChildAt(0);
             View dropDownButton = ((ViewGroup) linearLayout3).getChildAt(2);
 
 
-
             if (text.getVisibility() == View.GONE) {
+                // Nice animation transition
                 ObjectAnimator anim = ObjectAnimator.ofFloat(dropDownButton, "rotation",0, 180);
                 anim.setDuration(300);
                 anim.start();
 
-                // Nice animation
+                // Nice fade animation
                 text.animate().translationY(0);
                 Fade mFade = new Fade(Fade.IN);
                 TransitionManager.beginDelayedTransition((ViewGroup) v, mFade);
@@ -111,11 +112,12 @@ public class AjustesDialogFragment extends DialogFragment {
                 text.setVisibility(View.VISIBLE);
 
             } else {
+                // Nice animation transition
                 ObjectAnimator anim = ObjectAnimator.ofFloat(dropDownButton, "rotation",180, 0);
                 anim.setDuration(300);
                 anim.start();
 
-                // Nice animation
+                // Nice fade animation
                 text.animate().translationY(text.getHeight());
                 Fade mFade = new Fade(Fade.OUT);
                 TransitionManager.beginDelayedTransition((ViewGroup) v, mFade);

@@ -25,7 +25,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
-            android:text="HOW TO"
+            android:text="@string/which_where"
             android:textColor="@color/colorPrimary"
             android:textSize="36sp" />
 
@@ -98,7 +98,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Plastic"
+                                android:text="@string/plastic"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
@@ -117,7 +117,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
+                            android:text="@string/info_plastic"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
@@ -170,7 +170,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Paper"
+                                android:text="@string/paper"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
@@ -189,7 +189,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
+                            android:text="@string/info_paper"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
@@ -244,7 +244,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Glass"
+                                android:text="@string/glass"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
@@ -264,7 +264,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
+                            android:text="@string/info_glass"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
@@ -317,7 +317,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Organic"
+                                android:text="@string/organic"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
@@ -336,7 +336,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
+                            android:text="@string/info_organic"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
@@ -389,7 +389,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Waste"
+                                android:text="@string/waste"
                                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
                             <ImageView
@@ -408,7 +408,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_weight="1"
-                            android:text="Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final. "
+                            android:text="@string/info_waste"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:visibility="gone" />
