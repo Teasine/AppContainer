@@ -39,12 +39,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gifImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="TODO"
-            android:src="@drawable/botella" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

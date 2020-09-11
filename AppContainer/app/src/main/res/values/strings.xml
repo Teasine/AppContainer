@@ -4,11 +4,6 @@
     <string name="info">Info</string>
     <string name="settings">Settings</string>
     <string name="filter">Filter</string>
-    <string name="plastic">Plastic</string>
-    <string name="organic">Organic</string>
-    <string name="waste">Waste</string>
-    <string name="paper">Paper</string>
-    <string name="glass">Glass</string>
     <string name="title_activity_info">InfoActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -108,5 +103,21 @@
     <string name="Info">Info</string>
     <string name="DescriptionFilters">Costumizable filters and settings that adapt to your needs and preferences</string>
     <string name="selectall">Select All</string>
+    <string name="which_where"><![CDATA[Which & Where]]></string>
+    <string name="plastic">Plastic</string>
+    <string name="paper">Paper</string>
+    <string name="glass">Glass</string>
+    <string name="organic">Organic</string>
+    <string name="waste">Waste</string>
+    <string name="info_plastic">Recycle Plastic containers (Envases de plastico) – many of the plastic containers are made to easily be compacted.
+Recycle Metal containers  (Envases de metalicos) tin or can = lata
+Please be sure to rinse these prior to recycling, to help keep the recycle bins clean and free from unwanted critters.
+Recycle Plastic bags (Bolsas de plastico) – It is often good to just reuse your plastic bags, but when you are finished with them, please recycle.  A better option is to purchase the reusable bags from the supermarkets and limit your use of plastic bags.
+Recycle Bricks or Tetra Pak (Bricks) – Most commonly used for packaging liquids like milk, juice, tomato sauce and more.</string>
+    <string name="info_paper">Recycle Paper (Papel) – standard office papers, magazines or newspaper.
+Recycle Cardboard (Cartón) – cardboard boxes, cereal boxes and the like.  (Not milk and juice, those go in the yellow)What to deposit:Newspapers, magazines, comics, cardboard, paper or cardboard packaging, brochures, envelopes, folios, advertising, folded cartons well folded, all kinds of cardboard boxes (breakfast cereals, cookies, shoes, precooked meals), paper, sheets, newspapers, magazines, notebooks, etc.What not to deposit:Dirty papers (toilet paper, kitchen roll, napkins), tracing paper, plastic paper …</string>
+    <string name="info_glass">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.</string>
+    <string name="info_organic">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.</string>
+    <string name="info_waste">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.</string>
 
 </resources>
