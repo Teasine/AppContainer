@@ -195,9 +195,9 @@ public class MainActivity extends AppCompatActivity {
                         //presentActivity(findViewById(R.id.info));
                         // cerrar el fab con animacion cuando pulsas
                         // speedDialView.close();
-                        final AjustesDialogFragment ajustesDialogFragment = new AjustesDialogFragment();
-                        if (!ajustesDialogFragment.isAdded()) ajustesDialogFragment.show(getSupportFragmentManager(), "");
-                        speedDialView.close();
+                        final InfoDialogFragment infoDialogFragment = new InfoDialogFragment();
+                        if (!infoDialogFragment.isAdded()) infoDialogFragment.show(getSupportFragmentManager(), "");
+                        //speedDialView.close();
                         return true;
                     default:
                         return true; // true to keep the Speed Dial open
