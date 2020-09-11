@@ -1,12 +1,14 @@
 package com.example.container.appcontainer;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Layout;
 import android.transition.Fade;
 import android.transition.TransitionManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -132,9 +134,18 @@ public class InfoDialogFragment extends DialogFragment {
 
     public void onResume()
     {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+
+        ((Activity) getContext()).getWindowManager()
+                .getDefaultDisplay()
+                .getMetrics(displayMetrics);
+
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
         super.onResume();
         Window window = getDialog().getWindow();
-        window.setLayout(1070, 2000);
+        window.setLayout(width, height-100);
         window.setGravity(Gravity.CENTER);
     }
 
