@@ -1,9 +1,12 @@
 package com.example.container.appcontainer;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Layout;
 import android.transition.Fade;
@@ -47,8 +50,6 @@ public class InfoDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dialogFragment = this;
         context = getContext();
-
-        dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomAlertDialogStyle);
 
         View view = inflater.inflate(R.layout.fragment_info,container,false);
 
@@ -132,8 +133,12 @@ public class InfoDialogFragment extends DialogFragment {
         }
     };
 
+
     public void onResume()
     {
+        super.onResume();
+
+        // Getting height and width of the phone screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
         ((Activity) getContext()).getWindowManager()
@@ -143,10 +148,13 @@ public class InfoDialogFragment extends DialogFragment {
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
-        super.onResume();
+        // Adding margin and centering to the dialog
         Window window = getDialog().getWindow();
-        window.setLayout(width, height-100);
+        window.setLayout(width-30, height-120);
         window.setGravity(Gravity.CENTER);
+
+
+
     }
 
 }
