@@ -2,32 +2,19 @@ package com.example.container.appcontainer;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Layout;
 import android.transition.Fade;
 import android.transition.TransitionManager;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
-
-import com.google.android.material.card.MaterialCardView;
-import com.xw.repo.BubbleSeekBar;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class AjustesDialogFragment extends DialogFragment {
 
@@ -46,7 +33,7 @@ public class AjustesDialogFragment extends DialogFragment {
         dialogFragment = this;
         context = getContext();
 
-        View view = inflater.inflate(R.layout.fragment_ajustes,container,false);
+        View view = inflater.inflate(R.layout.fragment_info,container,false);
 
         plasticCard = view.findViewById(R.id.Plastic);
         plasticCard.setOnClickListener(collapseExpandTextView);

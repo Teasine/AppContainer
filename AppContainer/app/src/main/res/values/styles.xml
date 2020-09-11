@@ -23,7 +23,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    
+
     <style name="CustomAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:backgroundDimAmount">0.5</item>
     </style>
