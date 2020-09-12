@@ -21,6 +21,9 @@ import android.widget.RelativeLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
@@ -94,6 +97,26 @@ public class MainActivity extends AppCompatActivity {
 
 
         //------------------------------------ Obtengo mi localización ------------------------------------------------
+
+        // Primero obtenemos la localizacion. Despues podemos usar el fusion location service pq ya hay una localizacion
+        // guardada. Esto lo necesitamos pq fusion location service solo funciona si no es la primera vez que busca una
+        // localizacion, es decir, ya hay una de antes en el movil (de haber abierto maps por ejemplo). Si no hacemos
+        // esto, la primera vez que alguien abre la app despues de reiniciarlo, por ejemplo,
+        // fusedLocationClient.getLastLocation() devuelve null ya que no tiene datos de localizacion de antes.
+        LocationRequest mLocationRequest = LocationRequest.create();
+        mLocationRequest.setInterval(60000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationServices.getFusedLocationProviderClient(context).requestLocationUpdates(mLocationRequest, new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+            }
+        }, null);
+
+        // Ahora ya podemos trabajar con el fusion location manager (es mucho mas ligero que el normal)
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -333,32 +356,35 @@ public class MainActivity extends AppCompatActivity {
     // Refresca los marcadores en el mapa
     //-------------------------------------------------------------------------------------------
     public void refrescarMarcadores() {
-        // Para cada item anterior, comprobamos si el filtro está seleccionado y si es así lo
-        // añadimos otra vez
-        for (Marker marker : map.marcadoresPlastic) {
-            if (showOnMap[0] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
-        for (Marker marker : map.marcadoresGlass) {
-            if (showOnMap[1] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
-        for (Marker marker : map.marcadoresOrganic) {
-            if (showOnMap[2] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
-        for (Marker marker : map.marcadoresPaper) {
-            if (showOnMap[3] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
-        }
-        for (Marker marker : map.marcadoresWaste) {
-            if (showOnMap[4] == 1) {
-                marker.setVisible(true);
-            } else marker.setVisible(false);
+        // Solo si ha cargado marcadores
+        if (map.marcadores != null) {
+            // Para cada item anterior, comprobamos si el filtro está seleccionado y si es así lo
+            // añadimos otra vez
+            for (Marker marker : map.marcadoresPlastic) {
+                if (showOnMap[0] == 1) {
+                    marker.setVisible(true);
+                } else marker.setVisible(false);
+            }
+            for (Marker marker : map.marcadoresGlass) {
+                if (showOnMap[1] == 1) {
+                    marker.setVisible(true);
+                } else marker.setVisible(false);
+            }
+            for (Marker marker : map.marcadoresOrganic) {
+                if (showOnMap[2] == 1) {
+                    marker.setVisible(true);
+                } else marker.setVisible(false);
+            }
+            for (Marker marker : map.marcadoresPaper) {
+                if (showOnMap[3] == 1) {
+                    marker.setVisible(true);
+                } else marker.setVisible(false);
+            }
+            for (Marker marker : map.marcadoresWaste) {
+                if (showOnMap[4] == 1) {
+                    marker.setVisible(true);
+                } else marker.setVisible(false);
+            }
         }
     }
 
