@@ -30,8 +30,7 @@
         </string>
     <string name="info_paper">- <b>Paper:</b> standard office papers, magazines, newspapers&#8230;\n- <b>Cardboard:</b> cardboard boxes, cereal boxes and the like. Not milk and juice boxes, those go in the plastic bins.\n- <b>Others</b>: comics, paper or cardboard packaging, brochures, envelopes, advertising, paper sheets&#8230;
     </string>
-    <string name="info_glass">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.</string>
-    <string name="info_organic">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.</string>
-    <string name="info_waste">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.</string>
-
+    <string name="info_glass">- <b>Glass:</b> glass bottles, jars and containers. Do not include the metal lids to jars or the bottle caps. Do not throw fluorescents, light bulbs, mirrors, glasses, plates or broken ashtrays. Lightbulbs and such can be dropped off at specific stores.\n- <b>Cosmetics:</b> empty perfume and cosmetic bottles.</string>
+    <string name="info_organic">- <b>Organic waste:</b> leftover fruit and vegetables, scraps of meat and fish, shells of eggs, nuts, seafood. Also coffee grounds, teas, matches, sawdust.\n- <b>Dirty paper:</b> you can also deposit dirty kitchen paper, used napkins and oil stained cardboard.</string>
+    <string name="info_waste">- <b>Non organic: </b>diapers, pads, tampons, wet wipes, cigarette butts, dust, animal feces, litter sand, hair and pet fur, surgical face masks.</string>
 </resources>
