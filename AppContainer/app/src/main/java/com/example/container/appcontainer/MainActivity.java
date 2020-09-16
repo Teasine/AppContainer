@@ -213,11 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         boolean open = showFilterMenu(findViewById(R.id.filter));
                         return true; // cierra el fab sin animacion
                     case R.id.info:
-                        // info action
-                        //startInfoActivity();
-                        //presentActivity(findViewById(R.id.info));
-                        // cerrar el fab con animacion cuando pulsas
-                        // speedDialView.close();
+                        // info fragment
                         final InfoDialogFragment infoDialogFragment = new InfoDialogFragment();
                         if (!infoDialogFragment.isAdded()) infoDialogFragment.show(getSupportFragmentManager(), "");
                         //speedDialView.close();
@@ -408,25 +404,6 @@ public class MainActivity extends AppCompatActivity {
                 marker.setVisible(false);
             }
         }
-    }
-
-    // Empezar info activity
-    public void presentActivity(View view) {
-
-        // https://android.jlelse.eu/a-little-thing-that-matter-how-to-reveal-an-activity-with-circular-revelation-d94f9bfcae28
-        ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(this, view, "transition");
-        int revealX = (int) (view.getX() + view.getWidth() / 2);
-        int revealY = (int) (view.getY() + view.getHeight() / 2);
-
-        int[] locationOnScreen = new int[2];
-        view.getLocationOnScreen(locationOnScreen);
-
-        Intent intent = new Intent(this, InfoActivity.class);
-        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_X, locationOnScreen[0] + 250);
-        intent.putExtra(InfoActivity.EXTRA_CIRCULAR_REVEAL_Y, locationOnScreen[1]);
-
-        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
 }
