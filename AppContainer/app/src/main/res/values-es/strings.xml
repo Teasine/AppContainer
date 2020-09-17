@@ -100,13 +100,25 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="what_is_appcontainer">¿Qué es AppContainer?</string>
-    <string name="descriptionAppContainer">AppContainer es una herramienta diseñada para ayudarte a reciclar de manera más eficiente, salvando al medio ambiente y ahorrándote a tí tiempo!</string>
+    <string name="what_is_appcontainer">¿Qué es Wecycle?</string>
+    <string name="descriptionAppContainer">Wecycle es una herramienta diseñada para ayudarte a reciclar de manera más eficiente, salvando al medio ambiente y ahorrándote a tí tiempo!</string>
     <string name="DescriptionMap">Encuentra los contenedores de reciclaje más cercanos a tu localización.</string>
     <string name="map">Mapa</string>
     <string name="filters">Filtros</string>
     <string name="DescriptionInfo">Toda la información que necesitas sobre el reciclaje.</string>
     <string name="Info">Info</string>
     <string name="DescriptionFilters">Filtros costumizables y ajustes que se adaptan a tus necesidades y preferencias</string>
+    <string name="selectall">Select All</string>
+    <string name="which_where"><![CDATA[Which & Where]]></string>
+    <string name="info_plastic1">- <b>Plastic containers:</b> any basic plastic packaging, seran wrap, plastic bottles, PET, PVC&#8230;\n- <b>Metal containers:</b> containers like tuna tins or aluminium foil have to be clean before putting them into the recycling.
+    </string>
+    <string name="info_plastic2">- <b>Plastic bags:</b> they can be reused many times, but when you are finished with them, recycle them in the plastic bins.\n- <b>Bricks or Tetra Pak:</b> packaging used for milk, juice, tomato sauce and more.
+        </string>
+    <string name="info_paper">- <b>Paper:</b> standard office papers, magazines, newspapers&#8230;\n- <b>Cardboard:</b> cardboard boxes, cereal boxes and the like. Not milk and juice boxes, those go in the plastic bins.\n- <b>Others</b>: comics, paper or cardboard packaging, brochures, envelopes, advertising, paper sheets&#8230;
+    </string>
+    <string name="info_glass">- <b>Glass:</b> glass bottles, jars and containers. Do not include the metal lids to jars or the bottle caps. Do not throw fluorescents, light bulbs, mirrors, glasses, plates or broken ashtrays. Lightbulbs and such can be dropped off at specific stores.\n- <b>Cosmetics:</b> empty perfume and cosmetic bottles.</string>
+    <string name="info_organic">- <b>Organic waste:</b> leftover fruit and vegetables, scraps of meat and fish, shells of eggs, nuts, seafood. Also coffee grounds, teas, matches, sawdust.\n- <b>Dirty paper:</b> you can also deposit dirty kitchen paper, used napkins and oil stained cardboard.</string>
+    <string name="info_waste">- <b>Non organic: </b>diapers, pads, tampons, wet wipes, cigarette butts, dust, animal feces, litter sand, hair and pet fur, surgical face masks.</string>
+
 
 </resources>

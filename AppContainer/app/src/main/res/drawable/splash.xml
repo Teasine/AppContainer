@@ -4,6 +4,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/marker_restos"/>
+            android:src="@mipmap/ic_launcher_foreground"/>
     </item>
 </layer-list>
