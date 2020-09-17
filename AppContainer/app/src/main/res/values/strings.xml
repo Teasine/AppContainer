@@ -18,7 +18,7 @@
     <string name="Info">Don\'t know how it works?</string>
     <string name="DescriptionFilters">Use the customizable filters and settings to adapt the search to your needs and preferences</string>
     <string name="selectall">Select All</string>
-    <string name="which_where"><![CDATA[Which & Where]]></string>
+    <string name="which_where">How it works</string>
     <string name="plastic">Plastic</string>
     <string name="paper">Paper</string>
     <string name="glass">Glass</string>

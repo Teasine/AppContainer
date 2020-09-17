@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appname "Wecycle">
+    ]>
 <resources>
-    <string name="app_name">Wecycle</string>
+    <string name="app_name">&appname;</string>
     <string name="google_maps_key">AIzaSyAgkN-hpzsWKExY1_y1iyZLobI2012vi1k</string>
     <string name="info">Info</string>
     <string name="settings">Ajustes</string>
@@ -12,25 +15,22 @@
     <string name="glass">Vidrio</string>
     <string name="title_activity_info">InfoActivity</string>
 
-    <string name="what_is_appcontainer">¿Qué es Wecycle?</string>
-    <string name="descriptionAppContainer">Wecycle es una herramienta diseñada para ayudarte a reciclar de manera más eficiente, salvando al medio ambiente y ahorrándote a tí tiempo!</string>
+    <string name="what_is_appcontainer">¿Qué es &appname;?</string>
+    <string name="descriptionAppContainer">&appname; es una herramienta diseñada para ayudarte a reciclar de manera más eficiente, salvando al medio ambiente y ahorrándote a tí tiempo!</string>
     <string name="DescriptionMap">Encuentra los contenedores de reciclaje más cercanos a tu localización.</string>
     <string name="map">Dónde reciclar</string>
     <string name="filters">No te distraigas</string>
-    <string name="DescriptionInfo">Wecycle te enseña todo lo que necesitas saber para ampliar tus conocmientos sobre el reciclaje</string>
-    <string name="Info">¿No sabes como reciclar?</string>
+    <string name="DescriptionInfo">&appname; te enseña todo lo que necesitas saber para ampliar tus conocmientos sobre el reciclaje</string>
+    <string name="Info">¿No sabes cómo reciclar?</string>
     <string name="DescriptionFilters">Usa los filtros customizables y ajustes que se adaptan a tus necesidades y preferencias</string>
     <string name="selectall">Seleccionar todo</string>
-    <string name="which_where"><![CDATA[Which & Where]]></string>
-    <string name="info_plastic1">- <b>Contenedores de plástico:</b> any basic plastic packaging, seran wrap, plastic bottles, PET, PVC&#8230;\n- <b>Contenedores de metal:</b> containers like tuna tins or aluminium foil have to be clean before putting them into the recycling.
-    </string>
-    <string name="info_plastic2">- <b>Bolsas de plástico:</b> they can be reused many times, but when you are finished with them, recycle them in the plastic bins.\n- <b>Envases o Tetrabriks:</b> packaging used for milk, juice, tomato sauce and more.
-        </string>
-    <string name="info_paper">- <b>Papel:</b> standard office papers, magazines, newspapers&#8230;\n- <b>Cartón:</b> cardboard boxes, cereal boxes and the like. Not milk and juice boxes, those go in the plastic bins.\n- <b>Otros</b>: comics, paper or cardboard packaging, brochures, envelopes, advertising, paper sheets&#8230;
-    </string>
-    <string name="info_glass">- <b>Vidrio:</b> glass bottles, jars and containers. Do not include the metal lids to jars or the bottle caps. Do not throw fluorescents, light bulbs, mirrors, glasses, plates or broken ashtrays. Lightbulbs and such can be dropped off at specific stores.\n- <b>Cosmeticos:</b> empty perfume and cosmetic bottles.</string>
-    <string name="info_organic">- <b>Basura organica:</b> leftover fruit and vegetables, scraps of meat and fish, shells of eggs, nuts, seafood. Also coffee grounds, teas, matches, sawdust.\n- <b>Dirty paper:</b> you can also deposit dirty kitchen paper, used napkins and oil stained cardboard.</string>
-    <string name="info_waste">- <b>No organico: </b>diapers, pads, tampons, wet wipes, cigarette butts, dust, animal feces, litter sand, hair and pet fur, surgical face masks.</string>
+    <string name="which_where">Cómo funciona</string>
+    <string name="info_plastic1">- <b>Contenedores de plástico:</b> cualquier envase de plástico básico, envoltura de seran, botellas de plástico, PET, PVC&#8230;\n- <b>Contenedores de metal:</b> contenedores como latas de atún o papel de aluminio deben estar limpios antes de ponerlos en el reciclaje.</string>
+    <string name="info_plastic2">- <b>Bolsas de plástico:</b> se pueden reutilizar muchas veces, pero cuando haya terminado con ellos, recíclelos en los contenedores de plástico.\n- <b>Envases o Tetrabriks:</b> envases utilizados para leche, jugo, salsa de tomate y más.</string>
+    <string name="info_paper">- <b>Papel:</b> papeles de oficina estándar, revistas, periódicos&#8230;\n- <b>Cartón:</b> cajas de cartón, cajas de cereales y similares. No cajas de leche y jugo, esas van en los contenedores de plástico. \ N- <b> Otros </b>: comics, empaques de papel o cartón, folletos, sobres, publicidad, hojas de papel&#8230;</string>
+    <string name="info_glass">- <b>Vidrio:</b> botellas, frascos y recipientes de vidrio. No incluya las tapas metálicas de los frascos ni las tapas de las botellas. No arroje fluorescentes, bombillas, espejos, vasos, platos o ceniceros rotos. Las bombillas y demás se pueden dejar en tiendas específicas.\n- <b>Cosmeticos:</b> botellas vacías de perfume y cosmética.</string>
+    <string name="info_organic">- <b>Basura organica:</b> sobras de frutas y verduras, restos de carne y pescado, cáscaras de huevos, nueces, mariscos. También posos de café, tés, cerillas, aserrín. \ N- <b> Papel sucio: </b> también puede depositar papel de cocina sucio, servilletas usadas y cartones manchados de aceite.</string>
+    <string name="info_waste">- <b>No organico: </b>pañales, toallas sanitarias, tampones, toallitas húmedas, colillas de cigarrillos, polvo, heces de animales, arena, pelo y pieles de mascotas, mascarillas quirúrgicas.</string>
 
 
 </resources>
