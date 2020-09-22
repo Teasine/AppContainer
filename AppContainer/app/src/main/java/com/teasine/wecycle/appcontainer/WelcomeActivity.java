@@ -1,4 +1,4 @@
-package com.teasine.container.appcontainer;
+package com.teasine.wecycle.appcontainer;
 
 import android.Manifest;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.teasine.container.appcontainer;
+package com.teasine.wecycle.appcontainer;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;

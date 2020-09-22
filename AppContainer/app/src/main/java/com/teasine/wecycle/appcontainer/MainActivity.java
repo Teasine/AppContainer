@@ -1,4 +1,4 @@
-package com.teasine.container.appcontainer;
+package com.teasine.wecycle.appcontainer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;

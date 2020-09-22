@@ -5,7 +5,7 @@
 // LogicaFake.js
 // .....................................................................
 
-package com.teasine.container.appcontainer;
+package com.teasine.wecycle.appcontainer;
 
 import org.json.JSONObject;
 
