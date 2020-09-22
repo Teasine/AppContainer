@@ -1,22 +1,25 @@
-package com.example.container.appcontainer;
+package com.teasine.container.appcontainer;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.TransitionManager;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 
-public class AjustesDialogFragment extends DialogFragment {
+public class InfoDialogFragment extends DialogFragment {
 
     DialogFragment dialogFragment;
     private Context context;
@@ -31,6 +34,7 @@ public class AjustesDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dialogFragment = this;
+
         context = getContext();
 
         View view = inflater.inflate(R.layout.fragment_info,container,false);
@@ -115,12 +119,38 @@ public class AjustesDialogFragment extends DialogFragment {
         }
     };
 
+
     public void onResume()
     {
         super.onResume();
+
+        // Getting height and width of the phone screen
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+
+        ((Activity) getContext()).getWindowManager()
+                .getDefaultDisplay()
+                .getMetrics(displayMetrics);
+
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        // Adding margin and centering to the dialog
         Window window = getDialog().getWindow();
-        window.setLayout(1070, 2000);
+        window.setLayout(width-30, height-120);
         window.setGravity(Gravity.CENTER);
+    }
+
+    @Override public void onStart() {
+        super.onStart();
+
+        // Ponemos el dimAmount a 0 para que no haya un fondo negro transparente detrás
+        // del popup, ya que el fab ya nos crea una transparencia blanca que es la que
+        // queremos
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams windowParams = window.getAttributes();
+        windowParams.dimAmount = 0.0f;
+
+        window.setAttributes(windowParams);
     }
 
 }

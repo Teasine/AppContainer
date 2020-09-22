@@ -1,4 +1,4 @@
-package com.example.container.appcontainer;
+package com.teasine.container.appcontainer;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
