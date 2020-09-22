@@ -17,7 +17,7 @@
 
     <string name="what_is_appcontainer">¿Qué es &appname;?</string>
     <string name="descriptionAppContainer">&appname; es una herramienta diseñada para ayudarte a reciclar de manera más eficiente, salvando al medio ambiente y ahorrándote a tí tiempo!</string>
-    <string name="DescriptionMap">Encuentra los contenedores de reciclaje más cercanos a tu localización.</string>
+    <string name="DescriptionMap">Encuentra los contenedores de reciclaje más cercanos a tu localización</string>
     <string name="map">Dónde reciclar</string>
     <string name="filters">No te distraigas</string>
     <string name="DescriptionInfo">&appname; te enseña todo lo que necesitas saber para ampliar tus conocmientos sobre el reciclaje</string>
