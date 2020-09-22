@@ -43,7 +43,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/ic_transparent">
+            android:src="@drawable/ic_transparent_big">
 
         </ImageView>
 

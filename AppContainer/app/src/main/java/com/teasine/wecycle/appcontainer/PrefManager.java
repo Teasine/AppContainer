@@ -1,4 +1,4 @@
-package com.example.container.appcontainer;
+package com.teasine.wecycle.appcontainer;
 
 import android.content.Context;
 import android.content.SharedPreferences;
