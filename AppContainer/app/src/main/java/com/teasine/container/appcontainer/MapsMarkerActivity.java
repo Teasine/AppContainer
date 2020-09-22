@@ -107,24 +107,24 @@ public final class MapsMarkerActivity extends AppCompatActivity implements OnMap
         final Bitmap markerPaper = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_paper), width, height, false);
 
         // zoom camera
-        //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+        //googleMap.animateCamera( CameraUpdateFactory.zoomTo( 50.0f ) );
 
         // Animar camara a mi localizacion
         if (location != null) {
-            //location.setLatitude(39.470868);
-            //location.setLongitude(-0.358238);
+            //location.setLatitude(location.getLatitude());
+            //location.setLongitude(location.getLongitude());
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                    .zoom(17)                   // Sets the zoom
+                    .zoom(18)                   // Sets the zoom
                     .bearing(90)                // Sets the orientation of the camera to east
                     .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             //Obtener contenedores de Valencia del servidor
-            laLogica.obtenerContenedoresValencia(0.2f, location.getLatitude(), location.getLongitude(), new PeticionarioREST.Callback() {
+            laLogica.obtenerContenedoresValencia(0.4f, location.getLatitude(), location.getLongitude(), new PeticionarioREST.Callback() {
                 @Override
                 public void respuestaRecibida(int codigo, String cuerpo) {
                     try {
